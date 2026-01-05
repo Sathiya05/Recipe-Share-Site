@@ -284,7 +284,11 @@ window.addEventListener("DOMContentLoaded", () => {
       font-size:10px;
     }
   }  
-       
+    @media (max-width:391px) {
+      .line{
+        display:none;
+      }
+    }  
        
     </style>
 </head>
@@ -814,7 +818,7 @@ window.addEventListener("DOMContentLoaded", () => {
     <!-- Timeline -->
     <div class="relative">
       <!-- Vertical Line -->
-      <div class="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 bg-orange-300/60 dark:bg-orange-400/30 rounded-full"></div>
+      <div class="line absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-1 bg-orange-300/60 dark:bg-orange-400/30 rounded-full"></div>
 
       <div class="space-y-10">
 
