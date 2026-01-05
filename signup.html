@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecipeShare SignUp</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="growwpark_logo.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    screens: {
+                        'xs': '475px',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-all duration-300">
+
+  <!-- Main Container -->
+  <div class="min-h-screen flex items-center justify-center p-4 sm:p-6">
+    
+    <!-- Single Card -->
+    <div class="w-full max-w-5xl bg-white dark:bg-gray-900 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
+      
+      <!-- Card Header with Logo and Toggle Buttons -->
+      <div class="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 dark:border-gray-800">
+        <!-- Logo on Left -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <i class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center fas fa-utensils text-white text-base sm:text-lg"></i>
+          <span class="text-emerald-700 dark:text-emerald-300 text-lg sm:text-xl md:text-xl font-bold">
+           <a href="index.html"> Groww<span class="text-orange-500">Recipe</a></span>
+          </span>
+        </div>
+        
+        <!-- Toggle Buttons on Right -->
+        <div class="flex gap-2">
+          <!-- Dark/Light Toggle -->
+          <button id="theme-toggle" class="p-2 sm:p-3 bg-gray-100 dark:bg-gray-800 rounded-full shadow hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+            <i id="theme-icon" class="fas fa-sun text-yellow-400 text-sm sm:text-base"></i>
+          </button>
+          <!-- LTR/RTL Toggle -->
+          <button id="rtl-toggle" class="p-2 sm:p-3 bg-gray-100 dark:bg-gray-800 rounded-full shadow hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+            <i id="rtl-icon" class="fas fa-arrows-alt-h text-gray-700 dark:text-gray-300 text-sm sm:text-base"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Card Content -->
+      <div class="flex flex-col lg:flex-row">
+        
+        <!-- Left Content -->
+        <div class="leftcontent
+         lg:w-1/2 bg-orange-50 dark:bg-gray-800 p-6 sm:p-8 md:p-10 flex flex-col justify-center">
+          <div class="max-w-md mx-auto">
+            <!-- Welcome Text -->
+            <h1 class="text-3xl sm:text-4xl md:text-2xl font-extrabold text-emerald-500 dark:text-white mb-8">
+              Join Our Recipe Community
+            </h1>
+            
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              <div class="flex items-start">
+                <div class="bg-emerald-100 dark:bg-emerald-900 p-2 rounded-full mr-3">
+                  <i class="fas fa-share-alt text-emerald-600 dark:text-emerald-300"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-gray-800 dark:text-white mb-1">Share Recipes</h3>
+                  <p class="text-sm text-gray-600 dark:text-gray-300">Upload and share your favorite recipes with step-by-step instructions.</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="bg-emerald-100 dark:bg-emerald-900 p-2 rounded-full mr-3">
+                  <i class="fas fa-heart text-emerald-600 dark:text-emerald-300"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-gray-800 dark:text-white mb-1">Save Favorites</h3>
+                  <p class="text-sm text-gray-600 dark:text-gray-300">Bookmark recipes you love and create your personal cookbook.</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="bg-emerald-100 dark:bg-emerald-900 p-2 rounded-full mr-3">
+                  <i class="fas fa-comments text-emerald-600 dark:text-emerald-300"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-gray-800 dark:text-white mb-1">Connect & Discuss</h3>
+                  <p class="text-sm text-gray-600 dark:text-gray-300">Join cooking discussions, share tips, and ask for advice.</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="bg-emerald-100 dark:bg-emerald-900 p-2 rounded-full mr-3">
+                  <i class="fas fa-award text-emerald-600 dark:text-emerald-300"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-gray-800 dark:text-white mb-1">Earn Badges</h3>
+                  <p class="text-sm text-gray-600 dark:text-gray-300">Get recognition for your contributions with chef badges and awards.</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Testimonial -->
+            <div class="bg-white dark:bg-gray-700 p-4 rounded-xl shadow mb-6">
+              <div class="flex items-center">
+               
+                <div>
+                  <p class="font-medium text-gray-800 dark:text-white text-sm">"RecipeShare helped me turn my hobby into a passion. I've connected with amazing home cooks worldwide!"</p>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">- Maria, Home Cook</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Back to Home -->
+          
+          </div>
+        </div>
+        
+        <!-- Right Content - Signup Form -->
+        <div class="lg:w-1/2 p-6 sm:p-8 md:p-10 flex flex-col justify-center">
+          <div class="w-full max-w-md mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 justify-center dark:text-white text-center mb-2">
+              Create Your Account
+            </h2>
+            <p class="text-gray-600 dark:text-gray-300 text-center mb-6 sm:mb-8">
+              Start your culinary journey today
+            </p>
+
+            <form id="signup-form" class="space-y-4">
+              <!-- Name Row -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="first-name" class="block text-gray-700 dark:text-gray-300 font-medium mb-2 text-sm">First Name</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <i class="fas fa-user text-gray-400"></i>
+                    </div>
+                    <input type="text" id="first-name" placeholder="John" 
+                           class="w-full pl-10 pr-3 py-3 text-sm border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"/>
+                  </div>
+                </div>
+                
+                <div>
+                  <label for="last-name" class="block text-gray-700 dark:text-gray-300 font-medium mb-2 text-sm">Last Name</label>
+                  <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <i class="fas fa-user text-gray-400"></i>
+                    </div>
+                    <input type="text" id="last-name" placeholder="Doe" 
+                           class="w-full pl-10 pr-3 py-3 text-sm border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"/>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div>
+                <label for="email" class="block text-gray-700 dark:text-gray-300 font-medium mb-2 text-sm">Email Address</label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-envelope text-gray-400"></i>
+                  </div>
+                  <input type="email" id="email" placeholder="you@example.com" 
+                         class="w-full pl-10 pr-3 py-3 text-sm border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"/>
+                </div>
+              </div>
+
+              <!-- Password -->
+              <div>
+                <label for="password" class="block text-gray-700 dark:text-gray-300 font-medium mb-2 text-sm">Password</label>
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-lock text-gray-400"></i>
+                  </div>
+                  <input type="password" id="password" placeholder="At least 8 characters" 
+                         class="w-full pl-10 pr-10 py-3 text-sm border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"/>
+                  <button type="button" id="toggle-password" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                    <i class="fas fa-eye text-gray-400"></i>
+                  </button>
+                </div>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Must be at least 8 characters with a number and uppercase letter</p>
+              </div>
+
+              <!-- Confirm Password -->
+            
+
+              <!-- Terms Agreement -->
+              <div class="flex items-start">
+                <input type="checkbox" id="terms" class="mt-3 mr-3 h-4 w-4 text-orange-500 focus:ring-orange-400"/>
+                <label for="terms" class="text-sm text-gray-700 dark:text-gray-300">
+                 I agree to the Terms of Service and Privacy Policy.
+                </label>
+              </div>
+
+              <!-- Sign Up Button -->
+              <button type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition text-sm mt-4 justify-center">
+                <i class="fas fa-user-plus mr-2"></i>
+                Create Account
+              </button>
+
+              <!-- Divider -->
+              <div class="flex items-center my-6">
+                <hr class="flex-grow border-gray-300 dark:border-gray-700">
+                <span class="px-3 text-gray-500 dark:text-gray-400 text-sm">or sign up with</span>
+                <hr class="flex-grow border-gray-300 dark:border-gray-700">
+              </div>
+
+              <!-- Social Sign Up -->
+              <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <button type="button" class="w-full sm:flex-1 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg flex items-center justify-center gap-2 transition text-sm">
+                  <i class="fab fa-google"></i>
+                  <span>Google</span>
+                </button>
+                <button type="button" class="w-full sm:flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center gap-2 transition text-sm">
+                  <i class="fab fa-facebook-f"></i>
+                  <span>Facebook</span>
+                </button>
+              </div>
+
+              <!-- Login Link -->
+              <p class="text-center text-gray-600 dark:text-gray-300 mt-6 text-sm">
+                Already have an account?
+                <a href="login.html" class="text-orange-500 hover:underline font-medium ml-1">Login</a>
+              </p>
+            </form>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Dark Mode Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const htmlEl = document.documentElement;
+
+    themeToggle.addEventListener('click', () => {
+      htmlEl.classList.toggle('dark');
+      if(htmlEl.classList.contains('dark')){
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+        themeIcon.classList.remove('text-yellow-400');
+        themeIcon.classList.add('text-gray-300');
+      } else {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+        themeIcon.classList.remove('text-gray-300');
+        themeIcon.classList.add('text-yellow-400');
+      }
+    });
+
+    // RTL/LTR Toggle
+    const rtlToggle = document.getElementById('rtl-toggle');
+    const rtlIcon = document.getElementById('rtl-icon');
+
+    rtlToggle.addEventListener('click', () => {
+      if(htmlEl.getAttribute('dir') === 'ltr'){
+        htmlEl.setAttribute('dir', 'rtl');
+      } else {
+        htmlEl.setAttribute('dir', 'ltr');
+      }
+    });
+
+    // Toggle Password Visibility
+    const togglePasswordBtn = document.getElementById('toggle-password');
+    const passwordInput = document.getElementById('password');
+    
+    togglePasswordBtn.addEventListener('click', function() {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      
+      const icon = this.querySelector('i');
+      if (type === 'text') {
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    });
+
+    // Form Validation and Submission
+    const signupForm = document.getElementById('signup-form');
+    
+    signupForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const firstName = document.getElementById('first-name').value;
+      const lastName = document.getElementById('last-name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+      const terms = document.getElementById('terms').checked;
+      
+      // Basic validation
+      if (!firstName || !lastName || !email || !password || !confirmPassword) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      
+      if (password.length < 8) {
+        alert('Password must be at least 8 characters long.');
+        return;
+      }
+      
+      if (password !== confirmPassword) {
+        alert('Passwords do not match.');
+        return;
+      }
+      
+      if (!terms) {
+        alert('Please agree to the Terms of Service and Privacy Policy.');
+        return;
+      }
+      
+      // Simulate successful signup
+      alert(`Welcome ${firstName} ${lastName}! Your account has been created successfully.`);
+      window.location.href = 'index.html';
+    });
+
+    // Handle mobile viewport height
+    function setVH() {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+
+    setVH();
+    window.addEventListener('resize', setVH);
+    window.addEventListener('orientationchange', setVH);
+
+    // Add focus styles to form inputs
+    const formInputs = document.querySelectorAll('input');
+    formInputs.forEach(input => {
+      input.addEventListener('focus', function() {
+        this.parentElement.classList.add('ring-2', 'ring-orange-300');
+      });
+      
+      input.addEventListener('blur', function() {
+        this.parentElement.classList.remove('ring-2', 'ring-orange-300');
+      });
+    });
+  </script>
+
+  <style>
+    /* Custom breakpoint for very small devices */
+    @media (max-width: 320px) {
+      .card-container {
+        padding: 0.75rem !important;
+      }
+    }
+
+    /* Improved touch targets for mobile */
+    @media (max-width: 640px) {
+      button, 
+      a, 
+      input[type="checkbox"] + span,
+      label {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+      }
+      
+      input, 
+      button {
+        font-size: 16px !important; /* Prevents zoom on iOS */
+      }
+    }
+
+    /* Smooth transitions for all interactive elements */
+    button, 
+    input, 
+    a {
+      transition: all 0.2s ease-in-out;
+    }
+
+    /* Card hover effect */
+    .shadow-2xl {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .shadow-2xl:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Dark mode adjustments */
+    .dark .shadow-2xl {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    .dark .shadow-2xl:hover {
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Fix for mobile viewport height */
+    .min-h-screen {
+      min-height: 100vh;
+      min-height: calc(var(--vh, 1vh) * 100);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #e74c3c;
+      border-radius: 4px;
+    }
+    
+    .dark ::-webkit-scrollbar-track {
+      background: #2d2d2d;
+    }
+    
+    .dark ::-webkit-scrollbar-thumb {
+      background: #c0392b;
+    }
+    @media (max-width:391px){
+        .leftcontent{
+            display:none !important;
+        }
+    }
+  </style>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en" class="light" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RecipeShare Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="growwpark_logo.jpg">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          screens: {
+            'xs': '475px',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-all duration-300">
+
+  <!-- Main Container -->
+  <div class="min-h-screen flex items-center justify-center p-4 sm:p-6">
+    
+    <!-- Single Card -->
+    <div class="w-full max-w-4xl bg-white dark:bg-gray-900 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
+      
+      <!-- Card Header with Logo and Toggle Buttons -->
+      <div class="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200 dark:border-gray-800">
+        <!-- Logo on Left -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <i class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center fas fa-utensils text-white text-base sm:text-lg"></i>
+          <span class="text-emerald-700 dark:text-emerald-300 text-xl sm:text-xl md:text-xl font-bold">
+            <a href="index.html">Groww<span class="text-orange-500">Recipe</a></span>
+          </span>
+        </div>
+        
+        <!-- Toggle Buttons on Right -->
+        <div class="flex gap-2">
+          <!-- Light/Dark Mode Toggle -->
+          <button id="theme-toggle" class="p-2 sm:p-3 bg-gray-100 dark:bg-gray-800 rounded-full shadow hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+            <i id="theme-icon" class="fas fa-sun text-yellow-400 text-sm sm:text-base"></i>
+          </button>
+          <!-- LTR/RTL Toggle -->
+          <button id="rtl-toggle" class="p-2 sm:p-3 bg-gray-100 dark:bg-gray-800 rounded-full shadow hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+            <i id="rtl-icon" class="fas fa-arrows-alt-h text-gray-700 dark:text-gray-300 text-sm sm:text-base"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Card Content -->
+      <div class="flex flex-col lg:flex-row">
+        
+        <!-- Left Content -->
+        <div class="leftcontent lg:w-1/2 bg-orange-50 dark:bg-gray-800 p-6 sm:p-8 md:p-10 flex flex-col justify-center">
+          <div class="text-center">
+            <!-- Welcome Image -->
+            <div class="mb-6 sm:mb-8">
+              <img src="Screenshot 2025-12-26 234015.png" alt="Cooking Banner" 
+                   class="w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto rounded-xl sm:rounded-2xl shadow-lg object-cover">
+            </div>
+            
+            <!-- Welcome Text -->
+            <h1 class="text-xl sm:text-xl md:text-2xl font-extrabold text-emerald-500 dark:text-white mb-3 sm:mb-4">
+              Welcome to RecipeShare
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base md:text-lg">
+              Discover, share, and cook amazing recipes!
+            </p>
+          </div>
+        </div>
+        
+        <!-- Right Content - Form -->
+        <div class="lg:w-1/2 p-6 sm:p-8 md:p-10 flex flex-col justify-center">
+          <div class="w-full max-w-sm mx-auto">
+            <h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white text-center mb-6 sm:mb-8">
+              Login to Your Account
+            </h2>
+
+            <form class="space-y-4 sm:space-y-5">
+              <!-- Email -->
+              <div>
+                <label for="email" class="block text-gray-700 dark:text-gray-300 font-medium mb-2 text-sm sm:text-base">Email</label>
+                <input type="email" id="email" placeholder="Enter your email" 
+                       class="w-full px-4 py-3 text-sm sm:text-base border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"/>
+              </div>
+
+              <!-- Password -->
+              <div>
+                <label for="password" class="block text-gray-700 dark:text-gray-300 font-medium mb-2 text-sm sm:text-base">Password</label>
+                <input type="password" id="password" placeholder="Enter your password" 
+                       class="w-full px-4 py-3 text-sm sm:text-base border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"/>
+              </div>
+
+              <!-- Remember Me & Forgot Password -->
+              <div class="flex flex-col xs:flex-row items-start xs:items-center justify-between gap-2 xs:gap-0">
+                <label class="inline-flex items-center text-gray-700 dark:text-gray-300 text-sm sm:text-base">
+                  <input type="checkbox" class="form-checkbox h-4 w-4 text-orange-500">
+                  <span class="ml-2">Remember me</span>
+                </label>
+                <a href="#" class="text-orange-500 hover:underline text-sm whitespace-nowrap">Forgot Password?</a>
+              </div>
+
+              <!-- Login Button -->
+              <button type="submit" class="w-full py-3 bg-orange-500 hover:bg-orange-600 text-white justify-center rounded-lg transition text-sm sm:text-base mt-4">
+                Login
+              </button>
+            </form>
+
+            <!-- Divider -->
+            <div class="flex items-center my-6">
+              <hr class="flex-grow border-gray-300 dark:border-gray-700">
+              <span class="px-3 text-gray-500 dark:text-gray-400 text-sm">or</span>
+              <hr class="flex-grow border-gray-300 dark:border-gray-700">
+            </div>
+
+            <!-- Social Login Buttons -->
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+              <button class="w-full sm:flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center gap-2 transition text-sm sm:text-base">
+                <i class="fab fa-facebook-f"></i> 
+                <span class="whitespace-nowrap">Facebook</span>
+              </button>
+              <button class="w-full sm:flex-1 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg flex items-center justify-center gap-2 transition text-sm sm:text-base">
+                <i class="fab fa-google"></i> 
+                <span class="whitespace-nowrap">Google</span>
+              </button>
+            </div>
+
+            <!-- Sign Up -->
+            <p class="text-center text-gray-600 dark:text-gray-300 mt-6 sm:mt-8 text-sm">
+              Don't have an account? 
+              <a href="signup.html" class="text-orange-500 hover:underline font-medium">Sign Up</a>
+            </p>
+          </div>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Dark Mode Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const htmlEl = document.documentElement;
+
+    themeToggle.addEventListener('click', () => {
+      htmlEl.classList.toggle('dark');
+      if(htmlEl.classList.contains('dark')){
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+        themeIcon.classList.remove('text-yellow-400');
+        themeIcon.classList.add('text-gray-300');
+      } else {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+        themeIcon.classList.remove('text-gray-300');
+        themeIcon.classList.add('text-yellow-400');
+      }
+    });
+
+    // RTL/LTR Toggle
+    const rtlToggle = document.getElementById('rtl-toggle');
+    const rtlIcon = document.getElementById('rtl-icon');
+
+    rtlToggle.addEventListener('click', () => {
+      if(htmlEl.getAttribute('dir') === 'ltr'){
+        htmlEl.setAttribute('dir', 'rtl');
+      } else {
+        htmlEl.setAttribute('dir', 'ltr');
+      }
+    });
+
+    // Handle mobile viewport height
+    function setVH() {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+
+    setVH();
+    window.addEventListener('resize', setVH);
+    window.addEventListener('orientationchange', setVH);
+
+    // Form submission
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      if(email && password) {
+        // For demo purposes, just redirect
+        window.location.href = 'index.html';
+      } else {
+        alert('Please fill in all fields');
+      }
+    });
+  </script>
+
+  <style>
+    /* Custom breakpoint for very small devices */
+    @media (max-width: 320px) {
+      .card-container {
+        padding: 0.75rem !important;
+      }
+    }
+
+    /* Improved touch targets for mobile */
+    @media (max-width: 640px) {
+      button, 
+      a, 
+      input[type="checkbox"] + span,
+      label {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+      }
+      
+      input, 
+      button {
+        font-size: 16px !important; /* Prevents zoom on iOS */
+      }
+    }
+
+    /* Smooth transitions for all interactive elements */
+    button, 
+    input, 
+    a {
+      transition: all 0.2s ease-in-out;
+    }
+
+    /* Card hover effect */
+    .shadow-2xl {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .shadow-2xl:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Dark mode adjustments */
+    .dark .shadow-2xl {
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    .dark .shadow-2xl:hover {
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Fix for mobile viewport height */
+    .min-h-screen {
+      min-height: 100vh;
+      min-height: calc(var(--vh, 1vh) * 100);
+    }
+    @media (max-width:391px){
+      .leftcontent{
+        display:none;
+      }
+    }
+  </style>
+</body>
+</html>

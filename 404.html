@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RecipeShare — Page Not Found</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    .fade { animation: fadeIn .9s ease both; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+
+    .float { animation: float 3s ease-in-out infinite; }
+    @keyframes float {
+      0%{transform:translateY(0)}
+      50%{transform:translateY(-10px)}
+      100%{transform:translateY(0)}
+    }
+
+    .steam span { animation: rise 2.8s ease-in-out infinite; opacity:.6 }
+    .steam span:nth-child(2){ animation-delay:.6s }
+    .steam span:nth-child(3){ animation-delay:1.2s }
+
+    @keyframes rise {
+      0%{transform:translateY(10px) scale(.8);opacity:.4}
+      40%{opacity:.9}
+      100%{transform:translateY(-26px) scale(1.2);opacity:0}
+    }
+  </style>
+</head>
+
+<body class="bg-emerald-50 text-gray-800">
+
+  <section class="min-h-screen flex flex-col items-center justify-center px-6 fade">
+
+    <!-- Cooking Illustration -->
+    <div class="relative mb-6">
+      <div class="absolute -top-10 -left-6 float">🥕</div>
+      <div class="absolute -top-8 right-0 float">🧅</div>
+      <div class="absolute -top-6 left-10 float">🥬</div>
+
+      <div class="w-48 h-40 bg-white border-2 border-emerald-600 rounded-t-3xl shadow-lg flex items-end justify-center">
+        <div class="w-36 h-6 bg-emerald-600 rounded-b-2xl"></div>
+      </div>
+
+      <div class="steam absolute -top-6 left-1/2 -translate-x-1/2 flex gap-2 text-2xl text-emerald-400">
+        <span>~</span><span>~</span><span>~</span>
+      </div>
+    </div>
+
+    <!-- Heading -->
+    <h1 class="text-6xl font-extrabold text-emerald-700 tracking-tight mb-2">
+      404
+    </h1>
+
+    <p class="text-lg text-gray-600 max-w-md mb-5">
+      Looks like this recipe got lost in the kitchen…  
+      or maybe it’s still cooking 🍲✨
+    </p>
+
+
+
+    <!-- Buttons -->
+    <div class="flex gap-3 mb-8">
+      <a href="index.html"
+         class="px-5 py-2.5 rounded-xl bg-emerald-600 text-white shadow-md hover:shadow-lg hover:-translate-y-0.5 transition">
+        Back to Home
+      </a>
+
+      <a href="menu.html"
+         class="px-5 py-2.5 rounded-xl border border-emerald-600 text-emerald-700 bg-white hover:bg-emerald-50 transition">
+        Explore Recipes
+      </a>
+    </div>
+
+    <!-- Helpful Links -->
+    <div class="max-w-lg bg-white border border-emerald-200 rounded-2xl shadow-sm p-5">
+      <h3 class="text-emerald-700 font-semibold mb-2">Quick Links You May Find Useful</h3>
+
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+        <li><a href="trending.html" class="hover:text-emerald-700">🔥 Trending Recipes</a></li>
+        <li><a href="categories.html" class="hover:text-emerald-700">🍽️ Browse by Category</a></li>
+        <li><a href="submit-recipe.html" class="hover:text-emerald-700">📝 Submit Your Recipe</a></li>
+        <li><a href="contact.html" class="hover:text-emerald-700">📩 Contact Support</a></li>
+      </ul>
+    </div>
+
+  </section>
+
+</body>
+</html>

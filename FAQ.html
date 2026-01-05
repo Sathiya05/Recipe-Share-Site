@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecipeShare | Navbar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+          <link rel="icon" href="growwpark_logo.jpg">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+        
+        // Initialize theme from localStorage or default to light
+        document.addEventListener('DOMContentLoaded', function() {
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            const isRTL = localStorage.getItem('rtlMode') === 'true';
+            
+            if (isDarkMode) {
+                document.documentElement.classList.add('dark');
+            }
+            
+            if (isRTL) {
+                document.documentElement.dir = 'rtl';
+                document.documentElement.setAttribute('dir', 'rtl');
+            }
+            
+            // Initialize dropdowns and mobile menu
+            initNavbar();
+            updateTogglePositions();
+        });
+        
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const isDark = html.classList.contains('dark');
+            
+            if (isDark) {
+                html.classList.remove('dark');
+                localStorage.setItem('darkMode', 'false');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('darkMode', 'true');
+            }
+            
+            updateTogglePositions();
+        }
+        
+        function toggleRTL() {
+            const html = document.documentElement;
+            const isRTL = html.getAttribute('dir') === 'rtl';
+            
+            if (isRTL) {
+                html.setAttribute('dir', 'ltr');
+                localStorage.setItem('rtlMode', 'false');
+            } else {
+                html.setAttribute('dir', 'rtl');
+                localStorage.setItem('rtlMode', 'true');
+            }
+            
+            updateTogglePositions();
+        }
+        
+        function initNavbar() {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                    
+                    // Change icon
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('fa-bars')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            }
+            
+            // Desktop dropdowns - toggle on click
+            const dropdownBtns = document.querySelectorAll('.dropdown-btn');
+            
+            dropdownBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const dropdown = this.nextElementSibling;
+                    
+                    // Close other open dropdowns
+                    document.querySelectorAll('.dropdown-content').forEach(content => {
+                        if (content !== dropdown) {
+                            content.classList.add('hidden');
+                        }
+                    });
+                    
+                    // Toggle current dropdown
+                    dropdown.classList.toggle('hidden');
+                });
+            });
+            
+            // Mobile dropdowns
+            const mobileDropdownBtns = document.querySelectorAll('.mobile-dropdown-btn');
+            
+            mobileDropdownBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const dropdown = this.nextElementSibling;
+                    dropdown.classList.toggle('hidden');
+                });
+            });
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function() {
+                document.querySelectorAll('.dropdown-content').forEach(content => {
+                    content.classList.add('hidden');
+                });
+            });
+            
+            // Prevent dropdowns from closing when clicking inside them
+            document.querySelectorAll('.dropdown-content').forEach(content => {
+                content.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
+            
+            // Close mobile menu when clicking a link (for better UX)
+            const mobileLinks = document.querySelectorAll('#mobile-menu a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+        }
+        
+        function updateTogglePositions() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const isRTL = document.documentElement.getAttribute('dir') === 'rtl';
+            
+            // Dark mode toggle
+            const darkToggle = document.getElementById('dark-mode-toggle');
+            if (darkToggle) {
+                const darkToggleCircle = darkToggle.querySelector('div:first-child');
+                const darkToggleIcon = darkToggleCircle.querySelector('i');
+                
+                if (isDark) {
+                    darkToggleCircle.style.transform = isRTL ? 'translateX(-1.5rem)' : 'translateX(1.5rem)';
+                    darkToggleIcon.className = 'fas fa-moon text-blue-300 text-xs';
+                } else {
+                    darkToggleCircle.style.transform = isRTL ? 'translateX(-0.125rem)' : 'translateX(0.125rem)';
+                    darkToggleIcon.className = 'fas fa-sun text-yellow-500 text-xs';
+                }
+            }
+            
+            // RTL toggle
+            const rtlToggle = document.getElementById('rtl-toggle');
+            if (rtlToggle) {
+                const rtlToggleCircle = rtlToggle.querySelector('div:first-child');
+                const rtlToggleText = rtlToggleCircle.querySelector('span');
+                
+                if (isRTL) {
+                    rtlToggleCircle.style.transform = 'translateX(-1.5rem)';
+                    rtlToggleText.textContent = 'RTL';
+                } else {
+                    rtlToggleCircle.style.transform = 'translateX(0.125rem)';
+                    rtlToggleText.textContent = 'LTR';
+                }
+            }
+        }
+        
+        function resetToDefault() {
+            localStorage.setItem('darkMode', 'false');
+            localStorage.setItem('rtlMode', 'false');
+            document.documentElement.classList.remove('dark');
+            document.documentElement.setAttribute('dir', 'ltr');
+            updateTogglePositions();
+        }
+    </script>
+    <script>
+function setActiveNavLink() {
+  const path = window.location.pathname.split("/").pop();
+  const links = document.querySelectorAll(".nav-link, .mobile-nav-link");
+
+  links.forEach(link => {
+    link.classList.remove("active-link");
+
+    const href = link.getAttribute("href");
+    if (!href) return;
+
+    // Match exact file or folder index
+    if (path === href || (path === "" && href === "index.html")) {
+      link.classList.add("active-link");
+    }
+  });
+}
+
+// Highlight instantly when clicked (good UX)
+document.querySelectorAll(".nav-link, .mobile-nav-link").forEach(link => {
+  link.addEventListener("click", () => {
+    localStorage.setItem("activeNav", link.getAttribute("href"));
+  });
+});
+
+// Restore stored active link when page loads
+window.addEventListener("DOMContentLoaded", () => {
+  const saved = localStorage.getItem("activeNav");
+  if (saved) {
+    const link = document.querySelector(`[href="${saved}"]`);
+    if (link) link.classList.add("active-link");
+  }
+  setActiveNavLink();
+});
+</script>
+
+    <style>
+        .dark {
+            color-scheme: dark;
+        }
+        .transition-all-300 {
+            transition: all 0.3s ease;
+        }
+        /* Smooth dropdown animations */
+        .dropdown-content {
+            animation: fadeIn 0.2s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media(max-width:1280px){
+          .nav{
+                font-size: 13px;
+          }
+        }
+@media (max-width: 800px) {
+  nav > .flex .toggle,
+  nav > .flex .login {
+    display: none !important;
+  }
+}
+
+@media (max-width: 390px) {
+  #mobile-menu .login {
+    display: flex !important;
+  }
+  #mobile-menu .toggle {
+    display: flex !important;
+  }
+}
+
+
+@media (max-width: 360px) {
+  #mobile-menu .login {
+    display: block !important;
+  }
+  #mobile-menu .toggle {
+    display: flex !important;
+  }
+}
+@media (max-width:820px){
+   #rtl-toggle,
+  .login {
+    display: none !important;
+  }
+}
+.active-link {
+  color: #ea580c !important; /* orange-600 */
+
+}
+
+.active-link::after {
+  width: 1.5rem;
+}
+  @media (max-width:1024px){
+    .link{
+      font-size:10px;
+    }
+  }
+  
+       
+       
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md transition-all-300">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo on the left -->
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center">
+                            <i class="fas fa-utensils text-white text-lg"></i>
+                        </div>
+                        <span class="text-emerald-700 dark:text-emerald-300 text-xl font-bold">
+                            Groww<span class="text-orange-500">Recipe</span>
+                        </span>
+                    </a>
+                </div>
+
+                <!-- Centered Navigation Links - Hidden on mobile -->
+                <div class=" nav hidden lg:flex flex-1 justify-center">
+                    <div class="link flex items-center rtl:space-x-reverse">
+                        <!-- Home Dropdown -->
+                        <div class="relative">
+                            <button class="dropdown-btn flex items-center space-x-1 rtl:space-x-reverse text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                                <i class="fas "></i>
+                                <span>Home</span>
+                                <i class="fas fa-chevron-down text-xs mt-0.5"></i>
+                            </button>
+                            <div class="dropdown-content hidden absolute mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50">
+                                <a href="index.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+                                    <i class="fas mr-2 rtl:mr-0 rtl:ml-2"></i>
+                                  Home 1
+                                </a>
+                                <a href="home2.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+                                    <i class="fas mr-2 rtl:mr-0 rtl:ml-2"></i>
+                                    Home 2
+                                </a>
+                             
+                            </div>
+                        </div>
+                          <!-- Simple navigation links -->
+                        <a href="about.html" class="text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                            <i class="fas mr-1 rtl:mr-0 rtl:ml-1"></i>
+                            About
+                        </a>
+                        <a href="blog.html" class="text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                            <i class="fas mr-1 rtl:mr-0 rtl:ml-1"></i>
+                            Blog
+                        </a>
+                         <a href="menu.html" class="text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                            <i class="fas mr-1 rtl:mr-0 rtl:ml-1"></i>
+                            Menu
+                        </a>
+                        <a href="catogories.html" class="text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                            <i class="fas mr-1 rtl:mr-0 rtl:ml-1"></i>
+                            Categories
+                        </a>
+                          <a href="FAQ.html" class="nav-link text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                            <i class="fas mr-1 rtl:mr-0 rtl:ml-1"></i>
+                            FAQ
+                        </a>
+                          <a href="contact.html" class="text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                            <i class="fas mr-1 rtl:mr-0 rtl:ml-1"></i>
+                            Contact
+                        </a>
+
+                        <!-- Dashboard Dropdown -->
+                        <div class="relative">
+                            <button class="dropdown-btn flex items-center space-x-1 rtl:space-x-reverse text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                                <i class="fas "></i>
+                                <span>Dashboard</span>
+                                <i class="fas fa-chevron-down text-xs mt-0.5"></i>
+                            </button>
+                            <div class="dropdown-content hidden absolute mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50">
+                                <a href="user.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+                                    <i class="fas  mr-2 rtl:mr-0 rtl:ml-2"></i>
+                                    User
+                                </a>
+                                <a href="admin.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+                                    <i class="fas mr-2 rtl:mr-0 rtl:ml-2"></i>
+                                    Admin
+                              </a>
+                            </div>
+                        </div>
+                          <a href="sharecipe.html" class="text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                            <i class="fas fa-plus-circle mr-1 rtl:mr-0 rtl:ml-1"></i>
+                            Share Recipe
+                        </a>
+
+                   
+                    </div>
+                </div>
+
+                <!-- Toggles on the right -->
+                <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                    <!-- RTL Toggle - Hidden on small screens -->
+                    <button id="rtl-toggle" onclick="toggleRTL()" class="hidden sm:flex relative w-14 h-7 items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer transition-all-300">
+                        <div class="absolute left-1 rtl:left-auto rtl:right-1 w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center">
+                            <span class="text-xs font-bold text-gray-800">LTR</span>
+                        </div>
+                        <div class="flex w-full justify-between px-1">
+                            <i class="fas fa-align-left text-xs text-gray-600 dark:text-gray-400"></i>
+                            <i class="fas fa-align-right text-xs text-gray-600 dark:text-gray-400"></i>
+                        </div>
+                    </button>
+
+                    <!-- Light/Dark Mode Toggle -->
+                    <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="relative w-14 h-7 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer transition-all-300">
+                        <div class="absolute left-1 rtl:left-auto rtl:right-1 w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center">
+                            <i class="fas fa-sun text-yellow-500 text-xs"></i>
+                        </div>
+                        <div class="flex w-full justify-between px-1">
+                            <i class="fas fa-sun text-xs text-yellow-500"></i>
+                            <i class="fas fa-moon text-xs text-blue-400"></i>
+                        </div>
+                    </button>
+
+                    <!-- User avatar - Hidden on small screens -->
+                    <div class=" dropdown relative">
+                        <button class="dropdown-btn flex items-center space-x-2 rtl:space-x-reverse focus:outline-none">
+                            <div class="w-9 h-9 rounded-full bg-gradient-to-r from-orange-400 to-red-500 flex items-center justify-center text-white font-bold">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </button>
+                        <div class="dropdown-content hidden absolute mt-2 right-0 rtl:right-auto rtl:left-0 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50">
+                            <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+                                <p class="text-sm font-medium text-gray-900 dark:text-white">Chef Alex</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">alex@recipeshare.com</p>
+                            </div>
+                            <a href="login.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+                                <i class="fas fa-user mr-2 rtl:mr-0 rtl:ml-2"></i>
+                                Log In
+                            </a>
+                            <a href="signup.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+                                <i class="fas fa-cog mr-2 rtl:mr-0 rtl:ml-2"></i>
+                                Sign Up
+                            </a>
+                          
+                        </div>
+                    </div>
+
+                    <!-- Mobile menu button -->
+                    <button id="mobile-menu-button" class="lg:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile menu - Fully responsive with dropdowns -->
+            <div id="mobile-menu" class="lg:hidden hidden py-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col space-y-2">
+                    <!-- Mobile Home Dropdown -->
+                    <div class="mobile-dropdown">
+                        <button class="mobile-dropdown-btn flex items-center justify-between w-full text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-3 px-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                            <div class="flex items-center">
+                                <i class="fas mr-1 rtl:mr-0 rtl:ml-3"></i>
+                                <span>Home</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-sm transition-transform duration-300"></i>
+                        </button>
+                        <div class="mobile-dropdown-content hidden pl-10 rtl:pl-0 rtl:pr-10 pr-4 mt-1 space-y-1">
+                             <a href="index.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+                                    <i class="fas mr-2 rtl:mr-0 rtl:ml-2"></i>
+                                  Home 1
+                                </a>
+                                <a href="home2.html" class=" block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+                                    <i class="fas mr-2 rtl:mr-0 rtl:ml-2"></i>
+                                    Home 2
+                                </a>
+                        </div>
+                    </div>
+                      <!-- Simple navigation links -->
+                        <a href="about.html" class="text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                            <i class="fas mr-1 rtl:mr-0 rtl:ml-1"></i>
+                            About
+                        </a>
+                        <a href="blog.html" class="text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                            <i class="fas mr-1 rtl:mr-0 rtl:ml-1"></i>
+                            Blog
+                        </a>
+                         <a href="menu.html" class="text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                            <i class="fas mr-1 rtl:mr-0 rtl:ml-1"></i>
+                            Menu
+                        </a>
+                        <a href="catogories.html" class="text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                            <i class="fas mr-1 rtl:mr-0 rtl:ml-1"></i>
+                            Categories
+                        </a>
+                          <a href="FAQ.html" class="mobile-nav-link text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                            <i class="fas mr-1 rtl:mr-0 rtl:ml-1"></i>
+                            FAQ
+                        </a>
+                          <a href="contact.html" class="text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                            <i class="fas mr-1 rtl:mr-0 rtl:ml-1"></i>
+                            Contact
+                        </a>
+
+                    <!-- Mobile Dashboard Dropdown -->
+                    <div class="mobile-dropdown">
+                        <button class="mobile-dropdown-btn flex items-center justify-between w-full text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-3 px-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                            <div class="flex items-center">
+                                <i class="fas mr-1 rtl:mr-0 rtl:ml-3"></i>
+                                <span>Dashboard</span>
+                            </div>
+                            <i class="fas fa-chevron-down text-sm transition-transform duration-300"></i>
+                        </button>
+                        <div class="mobile-dropdown-content hidden pl-10 rtl:pl-0 rtl:pr-10 pr-4 mt-1 space-y-1">
+                          <a href="user.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+                                    <i class="fas  mr-2 rtl:mr-0 rtl:ml-2"></i>
+                                    User
+                                </a>
+                                <a href="admin.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+                                    <i class="fas mr-2 rtl:mr-0 rtl:ml-2"></i>
+                                    Admin
+                              </a>
+                        </div>
+                    </div>
+
+                
+                    <a href="sharecipe.html" class="flex items-center text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-3 px-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                        <i class="fas mr-1 rtl:mr-0 rtl:ml-3"></i>
+                        <span>Share Recipe</span>
+                    </a>
+                    
+                    <!-- Mobile user menu -->
+                    <div class="login pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
+                    
+                          <a href="login.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+                                <i class="fas fa-user mr-2 rtl:mr-0 rtl:ml-2"></i>
+                                Log In
+                            </a>
+                            <a href="signup.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+                                <i class="fas fa-cog mr-2 rtl:mr-0 rtl:ml-2"></i>
+                                Sign Up
+                            </a>
+                           
+                        
+                            
+                    </div>
+
+                    <div class="pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
+                        <div class="toggle flex items-center justify-between py-3 px-4">
+                            <span class="font-medium">RTL Mode</span>
+                            <button onclick="toggleRTL()" class="relative w-12 h-6 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer transition-all-300">
+                                <div class="absolute left-1 rtl:left-auto rtl:right-1 w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300"></div>
+                            </button>
+                        </div>
+                        
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-[url('tika.jpg')]
+      bg-cover bg-center opacity-20 dark:opacity-30"></div>
+
+    <div class="relative max-w-6xl mx-auto px-6 py-20 text-center">
+      <span class="inline-block px-4 py-1 mb-4 text-sm font-medium rounded-full bg-orange-100 text-orange-700
+        dark:bg-orange-500/20 dark:text-orange-300">
+        RecipeShare Help Center
+      </span>
+
+      <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white">
+        Frequently Asked <span class="text-orange-600 dark:text-orange-400">Questions</span>
+      </h1>
+
+      <p class="mt-4 max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
+        Find answers about sharing recipes, saving favorites, account settings, and more.
+      </p>
+
+      <!-- Hover Button -->
+      <div class="mt-8">
+        <a href="#faq-list"
+           class="inline-block px-6 py-3 text-lg font-semibold rounded-2xl bg-emerald-600 text-white shadow-lg
+           hover:bg-white hover:text-orange-600 hover:shadow-2xl border border-orange-600 transition-all duration-300">
+          Browse FAQs
+        </a>
+      </div>
+
+      <!-- Hover Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+        <div class="p-6 rounded-2xl bg-white/70 dark:bg-gray-900/60 backdrop-blur shadow hover:-translate-y-1
+          hover:shadow-2xl transition-all duration-300 cursor-pointer">
+          <h3 class="font-semibold text-gray-900 dark:text-white">🍲 Recipe Posting</h3>
+          <p class="text-sm mt-2 text-gray-600 dark:text-gray-300">
+            Learn how to upload and format your recipes.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white/70 dark:bg-gray-900/60 backdrop-blur shadow hover:-translate-y-1
+          hover:shadow-2xl transition-all duration-300 cursor-pointer">
+          <h3 class="font-semibold text-gray-900 dark:text-white">⭐ Favorites & Collections</h3>
+          <p class="text-sm mt-2 text-gray-600 dark:text-gray-300">
+            Save recipes and organize cooking lists easily.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-white/70 dark:bg-gray-900/60 backdrop-blur shadow hover:-translate-y-1
+          hover:shadow-2xl transition-all duration-300 cursor-pointer">
+          <h3 class="font-semibold text-gray-900 dark:text-white">👤 Account & Privacy</h3>
+          <p class="text-sm mt-2 text-gray-600 dark:text-gray-300">
+            Manage profile, login, and privacy settings.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ LIST SECTION -->
+<section id="faq-list" class="max-w-5xl mx-auto px-6 py-14">
+  
+  <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white text-center">
+    Common Questions
+  </h2>
+  <p class="mt-2 text-center text-gray-600 dark:text-gray-300">
+    Click a question to view the answer.
+  </p>
+
+  <div class="mt-10 space-y-4">
+
+    <!-- FAQ Item -->
+    <div class="group border border-orange-200 dark:border-white/10 rounded-2xl bg-white/70 dark:bg-gray-900/60 
+      backdrop-blur shadow hover:shadow-xl transition-all duration-300">
+      <button onclick="toggleFAQ(this)"
+        class="w-full flex justify-between items-center px-5 py-4 text-left">
+        <span class="font-semibold text-gray-900 dark:text-white">
+          How do I submit a new recipe?
+        </span>
+        <span class="transition-transform group-[data-open=true]:rotate-45 text-orange-600 text-2xl">+</span>
+      </button>
+      <div class="faq-content max-h-0 overflow-hidden transition-all duration-300">
+        <p class="px-5 pb-4 text-gray-600 dark:text-gray-300">
+          Go to “Add Recipe”, fill in the ingredients and steps, upload an image, and click submit. 
+          Your recipe will be visible after approval.
+        </p>
+      </div>
+    </div>
+
+    <!-- FAQ Item -->
+    <div class="group border border-orange-200 dark:border-white/10 rounded-2xl bg-white/70 dark:bg-gray-900/60 
+      backdrop-blur shadow hover:shadow-xl transition-all duration-300">
+      <button onclick="toggleFAQ(this)"
+        class="w-full flex justify-between items-center px-5 py-4 text-left">
+        <span class="font-semibold text-gray-900 dark:text-white">
+          Can I edit a recipe after posting it?
+        </span>
+        <span class="transition-transform group-[data-open=true]:rotate-45 text-orange-600 text-2xl">+</span>
+      </button>
+      <div class="faq-content max-h-0 overflow-hidden transition-all duration-300">
+        <p class="px-5 pb-4 text-gray-600 dark:text-gray-300">
+          Yes — open your recipe, click “Edit”, update the details, and save your changes anytime.
+        </p>
+      </div>
+    </div>
+
+       <div class="group border border-orange-200 dark:border-white/10 rounded-2xl bg-white/70 dark:bg-gray-900/60 
+      backdrop-blur shadow hover:shadow-xl transition-all duration-300">
+      <button onclick="toggleFAQ(this)"
+        class="w-full flex justify-between items-center px-5 py-4 text-left">
+        <span class="font-semibold text-gray-900 dark:text-white">
+          Where I need to search quick recipe?
+        </span>
+        <span class="transition-transform group-[data-open=true]:rotate-45 text-orange-600 text-2xl">+</span>
+      </button>
+      <div class="faq-content max-h-0 overflow-hidden transition-all duration-300">
+        <p class="px-5 pb-4 text-gray-600 dark:text-gray-300">
+          Yes — open your recipe, click “Edit”, update the details, and save your changes anytime.
+        </p>
+      </div>
+    </div>
+
+       <div class="group border border-orange-200 dark:border-white/10 rounded-2xl bg-white/70 dark:bg-gray-900/60 
+      backdrop-blur shadow hover:shadow-xl transition-all duration-300">
+      <button onclick="toggleFAQ(this)"
+        class="w-full flex justify-between items-center px-5 py-4 text-left">
+        <span class="font-semibold text-gray-900 dark:text-white">
+          Can I post a recipe after making it?
+        </span>
+        <span class="transition-transform group-[data-open=true]:rotate-45 text-orange-600 text-2xl">+</span>
+      </button>
+      <div class="faq-content max-h-0 overflow-hidden transition-all duration-300">
+        <p class="px-5 pb-4 text-gray-600 dark:text-gray-300">
+          Yes — open your recipe, click “Edit”, update the details, and save your changes anytime.
+        </p>
+      </div>
+    </div>
+
+    <!-- FAQ Item -->
+    <div class="group border border-orange-200 dark:border-white/10 rounded-2xl bg-white/70 dark:bg-gray-900/60 
+      backdrop-blur shadow hover:shadow-xl transition-all duration-300">
+      <button onclick="toggleFAQ(this)"
+        class="w-full flex justify-between items-center px-5 py-4 text-left">
+        <span class="font-semibold text-gray-900 dark:text-white">
+          How do favorites and collections work?
+        </span>
+        <span class="transition-transform group-[data-open=true]:rotate-45 text-orange-600 text-2xl">+</span>
+      </button>
+      <div class="faq-content max-h-0 overflow-hidden transition-all duration-300">
+        <p class="px-5 pb-4 text-gray-600 dark:text-gray-300">
+          Tap the ⭐ icon to save recipes to your favorites or create custom collections for meal planning.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  function toggleFAQ(button) {
+    const container = button.parentElement;
+    const content = container.querySelector(".faq-content");
+    const isOpen = container.getAttribute("data-open") === "true";
+
+    if (isOpen) {
+      content.style.maxHeight = "0px";
+      container.setAttribute("data-open", "false");
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+      container.setAttribute("data-open", "true");
+    }
+  }
+</script>
+
+<!-- SUPPORT CTA SECTION -->
+<section class="max-w-6xl mx-auto px-6 py-16">
+  <div class="rounded-3xl bg-gradient-to-r from-orange-600 to-orange-500 dark:from-orange-500 dark:to-orange-400
+    p-[1px] shadow-lg hover:shadow-2xl transition-all duration-300">
+    
+    <div class="rounded-3xl bg-white dark:bg-gray-900 px-8 py-10 flex flex-col md:flex-row items-center gap-8">
+      
+      <!-- Text -->
+      <div class="flex-1 text-center md:text-left">
+        <h2 class="text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white">
+          Still need help?
+        </h2>
+        <p class="mt-2 text-gray-600 dark:text-gray-300 max-w-xl">
+          Can’t find the answer you’re looking for? Our support team is here to help
+          with recipe uploads, account issues, and more.
+        </p>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex gap-4">
+        <a href="contact.html"
+           class="px-6 py-3 rounded-2xl font-semibold bg-emerald-600 text-white border border-orange-600
+           hover:bg-white hover:text-orange-600 transition-all duration-300 shadow">
+          Contact Support
+        </a>
+
+        <a href="mailto:support@recipeshare.com"
+           class="px-6 py-3 rounded-2xl font-semibold bg-white dark:bg-gray-800 text-orange-600
+           border border-orange-300 dark:border-white/20
+           hover:bg-orange-50 dark:hover:bg-gray-700 transition-all duration-300">
+          Email Us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- FAQ SEARCH & FILTER BAR -->
+<section class="max-w-6xl mx-auto px-6 mt-6 mb-6">
+  <div class="rounded-3xl bg-white/70 dark:bg-gray-900/60 backdrop-blur border 
+    border-orange-200 dark:border-white/10 shadow hover:shadow-xl transition-all duration-300 p-6">
+
+    <!-- Search Bar -->
+    <div class="flex flex-col md:flex-row gap-4 items-center">
+      <div class="flex items-center w-full md:flex-1 bg-white dark:bg-gray-800 border 
+        border-orange-200 dark:border-white/10 rounded-2xl px-4 py-2.5 shadow-sm 
+        focus-within:ring-2 focus-within:ring-orange-400 transition-all">
+        <i class="fa-solid fa-magnifying-glass text-emerald-500 mr-2"></i>
+        <input
+          type="text"
+          placeholder="Search FAQs…"
+          class="w-full bg-transparent outline-none text-gray-700 dark:text-gray-200 placeholder-gray-400"
+          oninput="filterFAQs(this.value)"
+        />
+      </div>
+
+      <!-- Ask Button -->
+      <a href="#contact"
+        class="px-6 py-3 rounded-2xl font-semibold bg-emerald-600 text-white border border-orange-600
+        hover:bg-white hover:text-orange-600 hover:shadow-lg transition-all duration-300">
+        Ask a Question
+      </a>
+    </div>
+
+    <!-- Category Chips -->
+    <div class="flex flex-wrap gap-3 mt-5">
+      <button class="faq-chip active-chip"
+        onclick="filterCategory('all')">All</button>
+      <button class="faq-chip" onclick="filterCategory('recipes')">Recipes</button>
+      <button class="faq-chip" onclick="filterCategory('account')">Account</button>
+      <button class="faq-chip" onclick="filterCategory('favorites')">Favorites</button>
+      <button class="faq-chip" onclick="filterCategory('privacy')">Privacy</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-chip {
+    @apply px-4 py-2 rounded-2xl text-sm font-medium border border-orange-300 
+    dark:border-white/20 bg-orange-50 dark:bg-gray-800 text-orange-700 
+    dark:text-orange-300 hover:bg-orange-600 hover:text-white hover:shadow 
+    transition-all duration-300 cursor-pointer;
+  }
+  .active-chip {
+    @apply bg-orange-600 text-white shadow border-orange-600;
+  }
+</style>
+
+<script>
+  function filterFAQs(query) {
+    query = query.toLowerCase();
+    document.querySelectorAll("[data-faq]").forEach(item => {
+      const text = item.innerText.toLowerCase();
+      item.style.display = text.includes(query) ? "block" : "none";
+    });
+  }
+
+  function filterCategory(category) {
+    document.querySelectorAll(".faq-chip").forEach(c => c.classList.remove("active-chip"));
+    event.target.classList.add("active-chip");
+
+    document.querySelectorAll("[data-faq]").forEach(item => {
+      if (category === "all" || item.dataset.faq === category) {
+        item.style.display = "block";
+      } else {
+        item.style.display = "none";
+      }
+    });
+  }
+</script>
+
+
+
+
+<footer class="w-full bg-gray-200 dark:bg-black text-gray-900">
+  <div class="max-w-7xl mx-auto px-4 py-14 grid gap-10
+              grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
+
+    <!-- Brand -->
+    <div>
+  <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse">
+
+   <i class="w-10 h-10 rounded-full bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center fas fa-utensils text-white text-lg"></i>
+
+<span class="text-emerald-700 dark:text-emerald-300 text-xl font-bold">
+Groww<span class="text-orange-500">Recipe</span>
+</span>
+</a>      <p class="mt-3 text-sm text-gray-700 dark:text-white">
+        A home for food lovers — discover, cook, share & inspire every plate.
+      </p>
+
+      <!-- Social -->
+   <div class="mt-5 flex gap-3">
+        <a class="w-9 h-9 grid place-items-center rounded-lg bg-black/10 hover:bg-white/20">🐦</a>
+        <a class="w-9 h-9 grid place-items-center rounded-lg bg-black/10 hover:bg-white/20">🌐</a>
+        <a class="w-9 h-9 grid place-items-center rounded-lg bg-black/10 hover:bg-white/20">▶️</a>
+      </div>
+    </div>
+
+    <!-- Popular Categories -->
+    <div>
+      <h3 class="text-lg font-semibold text-black dark:text-white mb-3">Popular Categories</h3>
+      <ul class="space-y-2 text-sm dark:text-white">
+        <li>🍕 Quick & Easy Meals</li>
+        <li>🥗 Vegan & Healthy</li>
+        <li>🍰 Desserts & Baking</li>
+        <li>🥤 Drinks & Smoothies</li>
+      </ul>
+    </div>
+
+    <!-- Community -->
+    <div>
+      <h3 class="text-lg font-semibold text-black dark:text-white mb-3">Community</h3>
+      <ul class="space-y-2 text-sm dark:text-white">
+        <li>👩‍🍳 Become a Creator</li>
+        <li>⭐ Top Home Chefs</li>
+        <li>📦 Submit Your Recipe</li>
+        <li>❤️ Saved Recipes</li>
+      
+      </ul>
+    </div>
+
+    <!-- Quick Links (New Section) -->
+    <div>
+      <h3 class="text-lg font-semibold text-black dark:text-white mb-3">Quick Links</h3>
+      <ul class="space-y-2 text-sm dark:text-white">
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="about.html">ℹ️ About</a></li>
+        <li><a href="blog.html">📰 Blog</a></li>
+        <li><a href="contact.html">📞 Contact Us</a></li>
+   
+      </ul>
+    </div>
+
+    <!-- Newsletter -->
+    <div>
+      <h3 class="text-lg font-semibold text-black dark:text-white mb-3">Get Weekly Recipes</h3>
+      <p class="text-sm text-gray-700 mb-3 dark:text-white">
+        Join our food family — fresh recipes delivered every Sunday 🍽️
+      </p>
+
+      <form class="flex gap-2">
+        <input type="email"
+          placeholder="Enter your email"
+          class="w-full px-3 py-2 rounded-xl bg-gray/10 border border-black/20
+                 text-white placeholder-gray-400 focus:outline-none">
+        <button
+          class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 font-medium">
+          Join
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bottom -->
+  <div class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 py-5 flex flex-col sm:flex-row gap-3 
+                justify-between text-sm text-gray-700 dark:text-white">
+
+      <p>© 2026 RecipeShare — Made with love & flavors </p>
+
+      <div class="flex gap-4">
+        <a>Privacy Policy</a>
+        <a>Terms of Use</a>
+        <a>Support</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
