@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RecipeShare - User Dashboard</title>
+              <link rel="icon" href="growwpark_logo.jpg">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -40,7 +43,7 @@
                     },
                     fontFamily: {
                         'sans': ['Inter', 'system-ui'],
-                        'logo': ['Pacifico', 'cursive']
+                        'heading': ['Poppins', 'sans-serif']
                     }
                 }
             }
@@ -48,38 +51,51 @@
     </script>
     
     <style>
-        :root {
-            --primary: #f59e0b;
-            --primary-dark: #d97706;
-        }
-        
         * {
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         
         body {
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
         }
         
         .logo {
-            font-family: 'Pacifico', cursive;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+        
+        .sidebar {
+            scrollbar-width: thin;
+            scrollbar-color: #f59e0b transparent;
+        }
+        
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: #f59e0b;
+            border-radius: 20px;
+        }
+        
+        .dark .sidebar::-webkit-scrollbar-thumb {
+            background-color: #d97706;
         }
         
         .card-shadow {
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
         }
         
         .dark .card-shadow {
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-        }
-        
-        .dark .gradient-bg {
-            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
         }
         
         .toggle-switch {
@@ -120,7 +136,7 @@
         }
         
         input:checked + .toggle-slider {
-            background-color: var(--primary);
+            background-color: #f59e0b;
         }
         
         input:checked + .toggle-slider:before {
@@ -131,38 +147,45 @@
             transform: translateX(-30px);
         }
         
-        .recipe-image-hover {
-            transition: transform 0.5s ease;
-        }
-        
-        .recipe-card:hover .recipe-image-hover {
-            transform: scale(1.05);
-        }
-        
         .sidebar-item {
             position: relative;
             overflow: hidden;
         }
         
-        .sidebar-item::after {
+        .sidebar-item::before {
             content: '';
             position: absolute;
-            bottom: 0;
             left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--primary);
-            transition: width 0.3s ease;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: #f59e0b;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
         }
         
-        .sidebar-item:hover::after,
-        .sidebar-item.active::after {
-            width: 100%;
+        .sidebar-item.active::before,
+        .sidebar-item:hover::before {
+            transform: translateX(0);
         }
         
-        .rtl .sidebar-item::after {
+        .rtl .sidebar-item::before {
             left: auto;
             right: 0;
+            transform: translateX(100%);
+        }
+        
+        .rtl .sidebar-item.active::before,
+        .rtl .sidebar-item:hover::before {
+            transform: translateX(0);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+        }
+        
+        .dark .gradient-bg {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
         }
         
         .badge-pulse {
@@ -197,6 +220,14 @@
             }
         }
         
+        .recipe-image-hover {
+            transition: transform 0.5s ease;
+        }
+        
+        .recipe-card:hover .recipe-image-hover {
+            transform: scale(1.05);
+        }
+        
         /* Mobile Sidebar Styles */
         .mobile-sidebar-overlay {
             position: fixed;
@@ -217,14 +248,13 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 320px; /* Slightly wider for tablet */
-            height: 100%;
+            width: 300px;
+            height: 100vh;
             background-color: white;
             z-index: 1000;
             transform: translateX(-100%);
             transition: transform 0.3s ease;
             overflow-y: auto;
-            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
         }
         
         .dark .mobile-sidebar {
@@ -239,28 +269,39 @@
             left: auto;
             right: 0;
             transform: translateX(100%);
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
         }
         
         .rtl .mobile-sidebar.active {
             transform: translateX(0);
         }
         
-        .close-sidebar-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 1001;
+        /* Desktop Sidebar Fixed */
+        @media (min-width: 1025px) {
+            .desktop-sidebar {
+                position: sticky;
+                top: 0;
+                height: 100vh;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+            
+            /* Hide scrollbar */
+            .desktop-sidebar::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .desktop-sidebar {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
         }
         
-        .rtl .close-sidebar-btn {
-            right: auto;
-            left: 20px;
-        }
-        
-        /* Hide desktop sidebar and show hamburger on screens ≤ 1024px (mobile & tablet) */
+        /* Hide desktop sidebar and show hamburger on screens ≤ 1024px */
         @media (max-width: 1024px) {
             .desktop-sidebar {
-                display: none;
+                display: none !important;
             }
             
             .hamburger-menu {
@@ -269,6 +310,11 @@
             
             main {
                 width: 100% !important;
+            }
+            
+            /* Show the header logo on mobile/tablet */
+            .mobile-header-logo {
+                display: flex !important;
             }
         }
         
@@ -281,10 +327,58 @@
             .hamburger-menu {
                 display: none !important;
             }
+            
+            /* Hide the header logo on desktop when sidebar is visible */
+            .mobile-header-logo {
+                display: none !important;
+            }
         }
+        
+        /* Prevent body scroll when sidebar is open */
+        body.sidebar-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .notification-dot {
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ef4444;
+            animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+        
+        @keyframes ping {
+            75%, 100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        
         @media(max-width:800px){
             .view{
                 margin-bottom:50px;
+            }
+        }
+        @media(max-width:800px){
+            .admin{
+                display:none !important;
+            }
+        }
+        @media(max-width:420px){
+            .search{
+                display:none !important;
+            }
+        }
+        /* Hide desktop controls on mobile */
+        @media(max-width:1024px){
+            .desktop-controls{
+                display:none !important;
             }
         }
     </style>
@@ -294,10 +388,10 @@
     <div class="mobile-sidebar-overlay" id="mobileSidebarOverlay"></div>
     
     <!-- Mobile Sidebar -->
-    <aside class="mobile-sidebar" id="mobileSidebar">
+    <div class="mobile-sidebar" id="mobileSidebar">
         <div class="p-6">
             <!-- Close Button -->
-            <button class="close-sidebar-btn text-gray-600 dark:text-gray-300 hover:text-primary-600" id="closeSidebarBtn">
+            <button class="absolute top-4 right-4 text-gray-600 dark:text-gray-300 hover:text-primary-600" id="closeSidebarBtn">
                 <i class="fas fa-times text-2xl"></i>
             </button>
             
@@ -305,10 +399,8 @@
             <div class="flex flex-col items-center text-center mb-6 pt-8">
                 <div class="relative mb-4">
                     <img src="grl.jpeg" 
-                         alt="Profile" class="w-24 h-24 rounded-full border-4 border-primary-500">
-                    <span class="absolute bottom-2 right-2 w-6 h-6 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full flex items-center justify-center">
-                        <i class="fas fa-check text-white text-xs"></i>
-                    </span>
+                         alt="Profile" class="w-20 h-20 rounded-full border-4 border-primary-500">
+                    <span class="absolute bottom-2 right-2 w-4 h-4 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
                 </div>
                 <h2 class="text-xl font-bold">Chef Sarah</h2>
                 <p class="text-gray-500 dark:text-gray-400 text-sm">Food Blogger & Recipe Creator</p>
@@ -369,272 +461,294 @@
                 </a>
             </nav>
             
-            <!-- Create Recipe Button -->
-            <button class="w-full bg-gradient-to-r from-primary-500 to-primary-700 hover:from-primary-600 hover:to-primary-800 text-white font-semibold py-3 rounded-lg flex items-center justify-center space-x-2 rtl:space-x-reverse transition duration-300">
-                <i class="fas fa-plus"></i>
-                <span>Create New Recipe</span>
-            </button>
-            
-            <!-- Recent Activity -->
-            <div class="mt-8">
-                <h3 class="font-bold text-lg mb-4 flex items-center">
-                    <i class="fas fa-history text-primary-600 dark:text-primary-400 mr-2 rtl:ml-2 rtl:mr-0"></i>
-                    Recent Activity
-                </h3>
-                <div class="space-y-4">
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center mr-3 rtl:ml-3 rtl:mr-0">
-                            <i class="fas fa-heart text-green-600 dark:text-green-400 text-sm"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm">Your "Spicy Thai Curry" got 24 new likes</p>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">2 hours ago</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-3 rtl:ml-3 rtl:mr-0">
-                            <i class="fas fa-comment text-blue-600 dark:text-blue-400 text-sm"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm">JohnDoe commented on your recipe</p>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">5 hours ago</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </aside>
-    
-    <!-- Header/Navigation -->
-    <header class="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <!-- Logo and Mobile Menu -->
-                <div class="flex items-center justify-between w-full md:w-auto">
-                    <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse">
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center">
-                            <i class="fas fa-utensils text-white text-lg"></i>
-                        </div>
-                        <span class="text-emerald-700 dark:text-emerald-300 text-xl font-bold">
-                            Groww<span class="text-orange-500">Recipe</span>
-                        </span>
-                    </a>
+            <!-- Theme Toggles -->
+            <div class="mt-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <h4 class="font-semibold text-sm mb-3">Display Settings</h4>
                 
-                    <!-- Hamburger Menu Button (Visible on mobile & tablet ≤ 1024px) -->
-                    <button id="mobileMenuBtn" class="hamburger-menu text-gray-600 dark:text-gray-300 ml-4">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
-                
-                <!-- Search Bar -->
-                <div class="mt-4 md:mt-0 w-full md:w-1/3">
-                    <div class="relative">
-                        <input type="text" placeholder="Search recipes, ingredients, chefs..." 
-                               class="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500">
-                        <i class="fas fa-search absolute left-3 top-3 text-gray-400 rtl:left-auto rtl:right-3"></i>
-                    </div>
-                </div>
-                
-                <!-- User Controls (Hidden on mobile & tablet) -->
-                <div class="hidden lg:flex items-center space-x-6 rtl:space-x-reverse mt-4 md:mt-0">
-                    <!-- Notification -->
-                    <div class="relative">
-                        <button class="relative p-2 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">
-                            <i class="fas fa-bell text-xl"></i>
-                        </button>
-                    </div>
-                    
-                    <!-- Toggle Buttons -->
-                    <div class="flex items-center space-x-4 rtl:space-x-reverse border-l border-r border-gray-200 dark:border-gray-700 px-4">
-                        <!-- RTL/LTR Toggle -->
-                        <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                            <span class="text-sm font-medium">LTR</span>
-                            <label class="toggle-switch">
-                                <input type="checkbox" id="rtlToggle">
-                                <span class="toggle-slider"></span>
-                            </label>
-                            <span class="text-sm font-medium">RTL</span>
-                        </div>
-                        
-                        <!-- Dark/Light Toggle -->
-                        <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                            <i class="fas fa-sun text-yellow-500"></i>
-                            <label class="toggle-switch">
-                                <input type="checkbox" id="darkModeToggle">
-                                <span class="toggle-slider"></span>
-                            </label>
-                            <i class="fas fa-moon text-indigo-400"></i>
-                        </div>
-                    </div>
-                    
-                    <!-- User Profile -->
-                    <div class="flex items-center space-x-3 rtl:space-x-reverse">
-                        <div class="relative">
-                            <img src="grl.jpeg" 
-                                 alt="Profile" class="w-10 h-10 rounded-full border-2 border-primary-500">
-                            <span class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Mobile Controls (Hidden by default) -->
-        <div id="mobileControls" class="lg:hidden hidden px-4 py-3 border-t border-gray-200 dark:border-gray-700">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-4 rtl:space-x-reverse">
-                    <!-- RTL/LTR Toggle -->
+                <!-- Dark/Light Toggle -->
+                <div class="flex items-center justify-between mb-4">
                     <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                        <span class="text-sm">LTR</span>
+                        <i class="fas fa-sun text-yellow-500"></i>
+                        <span class="text-sm">Light/Dark Mode</span>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="mobileDarkModeToggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                
+                <!-- RTL/LTR Toggle -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                        <span class="text-sm">Layout Direction</span>
+                    </div>
+                    <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                        <span class="text-sm font-medium">LTR</span>
                         <label class="toggle-switch">
                             <input type="checkbox" id="mobileRtlToggle">
                             <span class="toggle-slider"></span>
                         </label>
-                        <span class="text-sm">RTL</span>
-                    </div>
-                    
-                    <!-- Dark/Light Toggle -->
-                    <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                        <i class="fas fa-sun text-yellow-500"></i>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="mobileDarkModeToggle">
-                            <span class="toggle-slider"></span>
-                        </label>
-                        <i class="fas fa-moon text-indigo-400"></i>
+                        <span class="text-sm font-medium">RTL</span>
                     </div>
                 </div>
-                
-                <!-- Notification for mobile -->
-                <button class="relative p-2 text-gray-600 dark:text-gray-300">
-                    <i class="fas fa-bell text-xl"></i>
-                </button>
             </div>
         </div>
-    </header>
+    </div>
     
-    <!-- Main Content -->
-    <div class="container mx-auto px-4 py-6">
-        <div class="flex flex-col lg:flex-row gap-6">
-            <!-- Desktop Sidebar (Hidden on mobile & tablet ≤ 1024px) -->
-            <aside class="lg:w-1/4 desktop-sidebar">
-                <div class="bg-white dark:bg-gray-800 rounded-xl card-shadow p-5 mb-6">
-                    <!-- User Info -->
-                    <div class="flex flex-col items-center text-center mb-6">
-                        <div class="relative mb-4">
-                            <img src="grl.jpeg" 
-                                 alt="Profile" class="w-24 h-24 rounded-full border-4 border-primary-500">
-                            <span class="absolute bottom-2 right-2 w-6 h-6 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full flex items-center justify-center">
-                                <i class="fas fa-check text-white text-xs"></i>
-                            </span>
-                        </div>
-                        <h2 class="text-xl font-bold">Chef Sarah</h2>
-                        <p class="text-gray-500 dark:text-gray-400 text-sm">Food Blogger & Recipe Creator</p>
-                        <div class="mt-2 flex items-center justify-center space-x-1 rtl:space-x-reverse">
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <i class="fas fa-star text-yellow-500"></i>
-                            <i class="fas fa-star-half-alt text-yellow-500"></i>
-                            <span class="text-sm ml-1 rtl:mr-1 rtl:ml-0">4.7</span>
-                        </div>
+    <!-- User Dashboard Container -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- Desktop Sidebar (Hidden on mobile & tablet ≤ 1024px) -->
+        <aside class="desktop-sidebar sidebar hidden lg:flex flex-col w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700">
+            <!-- Logo -->
+            <div class="flex items-center mt-6 ml-4">
+                <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center">
+                        <i class="fas fa-utensils text-white text-lg"></i>
                     </div>
-                    
-                    <!-- User Stats -->
-                    <div class="grid grid-cols-3 gap-3 mb-6">
-                        <div class="text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <p class="text-2xl font-bold text-primary-600 dark:text-primary-400">127</p>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">Recipes</p>
-                        </div>
-                        <div class="text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <p class="text-2xl font-bold text-primary-600 dark:text-primary-400">5.2K</p>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">Followers</p>
-                        </div>
-                        <div class="text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <p class="text-2xl font-bold text-primary-600 dark:text-primary-400">342</p>
-                            <p class="text-xs text-gray-500 dark:text-gray-400">Following</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Navigation Menu -->
-                    <nav class="space-y-2 mb-6">
-                        <a href="#" class="sidebar-item flex items-center space-x-3 rtl:space-x-reverse p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 active">
-                            <i class="fas fa-home text-primary-600 dark:text-primary-400 w-5 text-center"></i>
-                            <span>Dashboard</span>
-                        </a>
-                        <a href="#" class="sidebar-item flex items-center space-x-3 rtl:space-x-reverse p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
-                            <i class="fas fa-book text-gray-600 dark:text-gray-400 w-5 text-center"></i>
-                            <span>My Recipes</span>
-                            <span class="ml-auto rtl:mr-auto rtl:ml-0 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-xs px-2 py-1 rounded-full">12</span>
-                        </a>
-                        <a href="#" class="sidebar-item flex items-center space-x-3 rtl:space-x-reverse p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
-                            <i class="fas fa-heart text-gray-600 dark:text-gray-400 w-5 text-center"></i>
-                            <span>Saved Recipes</span>
-                        </a>
-                       
-                        <a href="#" class="sidebar-item flex items-center space-x-3 rtl:space-x-reverse p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
-                            <i class="fas fa-chart-line text-gray-600 dark:text-gray-400 w-5 text-center"></i>
-                            <span>Analytics</span>
-                        </a>
-                        <a href="#" class="sidebar-item flex items-center space-x-3 rtl:space-x-reverse p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
-                            <i class="fas fa-cog text-gray-600 dark:text-gray-400 w-5 text-center"></i>
-                            <span>Settings</span>
-                        </a>
-                        
-                            <a href="login.html" class="sidebar-item flex items-center space-x-3 rtl:space-x-reverse p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
-                            <i class="fas fa-cog text-gray-600 dark:text-gray-400 w-5 text-center"></i>
-                            <span>Logout</span>
-                        </a>
-                         
-                     
-                    </nav>
-                    
-                    <!-- Create Recipe Button -->
-                    <button class="w-full bg-gradient-to-r from-primary-500 to-primary-700 hover:from-primary-600 hover:to-primary-800 text-white font-semibold py-3 rounded-lg flex items-center justify-center space-x-2 rtl:space-x-reverse transition duration-300 floating-button">
-                        <i class="fas fa-plus"></i>
-                        <span>Create New Recipe</span>
-                    </button>
-                </div>
-                
-                <!-- Recent Activity -->
-                <div class="bg-white dark:bg-gray-800 rounded-xl card-shadow p-5">
-                    <h3 class="font-bold text-lg mb-4 flex items-center">
-                        <i class="fas fa-history text-primary-600 dark:text-primary-400 mr-2 rtl:ml-2 rtl:mr-0"></i>
-                        Recent Activity
-                    </h3>
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center mr-3 rtl:ml-3 rtl:mr-0">
-                                <i class="fas fa-heart text-green-600 dark:text-green-400 text-sm"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm">Your "Spicy Thai Curry" got 24 new likes</p>
-                                <p class="text-xs text-gray-500 dark:text-gray-400">2 hours ago</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mr-3 rtl:ml-3 rtl:mr-0">
-                                <i class="fas fa-comment text-blue-600 dark:text-blue-400 text-sm"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm">JohnDoe commented on your recipe</p>
-                                <p class="text-xs text-gray-500 dark:text-gray-400">5 hours ago</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center mr-3 rtl:ml-3 rtl:mr-0">
-                                <i class="fas fa-user-plus text-purple-600 dark:text-purple-400 text-sm"></i>
-                            </div>
-                            <div>
-                                <p class="text-sm">ChefMichael started following you</p>
-                                <p class="text-xs text-gray-500 dark:text-gray-400">1 day ago</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </aside>
+                    <span class="text-emerald-700 dark:text-emerald-300 text-xl font-bold">
+                        Groww<span class="text-orange-500">Recipe</span>
+                    </span>
+                </a>
+            </div>
             
-            <!-- Main Dashboard Content -->
-            <main class="lg:w-3/4">
+            <!-- User Info -->
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+                <div class="flex flex-col items-center text-center">
+                    <div class="relative mb-4">
+                        <img src="grl.jpeg" 
+                             alt="Profile" class="w-20 h-20 rounded-full border-4 border-primary-500">
+                        <span class="absolute bottom-2 right-2 w-4 h-4 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                    </div>
+                    <h2 class="text-xl font-bold">Chef Sarah</h2>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">Food Blogger & Recipe Creator</p>
+                    <div class="mt-2 flex items-center justify-center space-x-1 rtl:space-x-reverse">
+                        <i class="fas fa-star text-yellow-500"></i>
+                        <i class="fas fa-star text-yellow-500"></i>
+                        <i class="fas fa-star text-yellow-500"></i>
+                        <i class="fas fa-star text-yellow-500"></i>
+                        <i class="fas fa-star-half-alt text-yellow-500"></i>
+                        <span class="text-sm ml-1 rtl:mr-1 rtl:ml-0">4.7</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- User Stats -->
+            <div class="p-6 border-b border-gray-200 dark:border-gray-700">
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <p class="text-2xl font-bold text-primary-600 dark:text-primary-400">127</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Recipes</p>
+                    </div>
+                    <div class="text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <p class="text-2xl font-bold text-primary-600 dark:text-primary-400">5.2K</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Followers</p>
+                    </div>
+                    <div class="text-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <p class="text-2xl font-bold text-primary-600 dark:text-primary-400">342</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Following</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Navigation Menu -->
+            <nav class="flex-1 p-4 space-y-1">
+                <a href="#" class="sidebar-item flex items-center space-x-3 rtl:space-x-reverse p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 active">
+                    <i class="fas fa-home text-primary-600 dark:text-primary-400 w-5 text-center"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="sidebar-item flex items-center space-x-3 rtl:space-x-reverse p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <i class="fas fa-book text-gray-600 dark:text-gray-400 w-5 text-center"></i>
+                    <span>My Recipes</span>
+                    <span class="ml-auto rtl:mr-auto rtl:ml-0 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 text-xs px-2 py-1 rounded-full">12</span>
+                </a>
+                <a href="#" class="sidebar-item flex items-center space-x-3 rtl:space-x-reverse p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <i class="fas fa-heart text-gray-600 dark:text-gray-400 w-5 text-center"></i>
+                    <span>Saved Recipes</span>
+                </a>
+               
+                <a href="#" class="sidebar-item flex items-center space-x-3 rtl:space-x-reverse p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <i class="fas fa-chart-line text-gray-600 dark:text-gray-400 w-5 text-center"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="#" class="sidebar-item flex items-center space-x-3 rtl:space-x-reverse p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <i class="fas fa-cog text-gray-600 dark:text-gray-400 w-5 text-center"></i>
+                    <span>Settings</span>
+                </a>
+                
+                <a href="login.html" class="sidebar-item flex items-center space-x-3 rtl:space-x-reverse p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <i class="fas fa-sign-out-alt text-gray-600 dark:text-gray-400 w-5 text-center"></i>
+                    <span>Logout</span>
+                </a>
+            </nav>
+         
+        </aside>
+        
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top Header -->
+            <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                <div class="px-4 sm:px-6 py-4">
+                    <div class="flex items-center justify-between">
+                        <!-- Left: Mobile Logo (Only shows on mobile/tablet) -->
+                        <div class="mobile-header-logo hidden">
+                            <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse">
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center">
+                                    <i class="fas fa-utensils text-white text-lg"></i>
+                                </div>
+                                <span class="text-emerald-700 dark:text-emerald-300 text-xl font-bold">
+                                    Groww<span class="text-orange-500">Recipe</span>
+                                </span>
+                            </a>
+                        </div>
+                        
+                        <!-- Desktop Search (Centered on desktop) -->
+                        <div class="flex-1 max-w-2xl mx-auto">
+                            <div class="search relative">
+                                <input type="text" placeholder="Search recipes, ingredients, chefs..." 
+                                       class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                <i class="fas fa-search absolute left-3 top-3 text-gray-400 rtl:left-auto rtl:right-3"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- Right: Controls & Hamburger Menu -->
+                        <div class="flex items-center space-x-4 rtl:space-x-reverse ml-4">
+                            <!-- Mobile Search Button -->
+                            <button id="mobileSearchBtn" class="md:hidden text-gray-600 dark:text-gray-300">
+                                <i class="fas fa-search text-xl"></i>
+                            </button>
+                            
+                            <!-- Desktop Controls (RTL & Theme Toggles) -->
+                            <div class="desktop-controls hidden lg:flex items-center space-x-4 rtl:space-x-reverse border-l border-r border-gray-200 dark:border-gray-700 px-4">
+                                <!-- RTL/LTR Toggle -->
+                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                                    <span class="text-sm font-medium">LTR</span>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="rtlToggle">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <span class="text-sm font-medium">RTL</span>
+                                </div>
+                                
+                                <!-- Dark/Light Toggle -->
+                                <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                                    <i class="fas fa-sun text-yellow-500"></i>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="darkModeToggle">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                    <i class="fas fa-moon text-indigo-400"></i>
+                                </div>
+                            </div>
+                            
+                            <!-- Notifications -->
+                            <div class="relative">
+                                <button id="notificationsBtn" class="relative p-2 text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400">
+                                    <i class="fas fa-bell text-xl"></i>
+                                </button>
+                                
+                                <!-- Notifications Dropdown -->
+                                <div id="notificationsDropdown" class="hidden absolute right-0 rtl:left-0 rtl:right-auto mt-2 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 z-50">
+                                    <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                                        <h3 class="font-semibold">Notifications</h3>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">You have 3 new notifications</p>
+                                    </div>
+                                    <div class="max-h-96 overflow-y-auto">
+                                        <div class="p-4 border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                            <div class="flex">
+                                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
+                                                    <i class="fas fa-heart text-green-600 dark:text-green-400"></i>
+                                                </div>
+                                                <div class="ml-3 rtl:mr-3 rtl:ml-0">
+                                                    <p class="text-sm font-medium">New Likes</p>
+                                                    <p class="text-xs text-gray-500 dark:text-gray-400">Your "Spicy Thai Curry" got 24 new likes</p>
+                                                    <p class="text-xs text-gray-400 mt-1">2 hours ago</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                            <div class="flex">
+                                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                                                    <i class="fas fa-comment text-blue-600 dark:text-blue-400"></i>
+                                                </div>
+                                                <div class="ml-3 rtl:mr-3 rtl:ml-0">
+                                                    <p class="text-sm font-medium">New Comment</p>
+                                                    <p class="text-xs text-gray-500 dark:text-gray-400">JohnDoe commented on your recipe</p>
+                                                    <p class="text-xs text-gray-400 mt-1">5 hours ago</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="p-4 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                            <div class="flex">
+                                                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center">
+                                                    <i class="fas fa-user-plus text-purple-600 dark:text-purple-400"></i>
+                                                </div>
+                                                <div class="ml-3 rtl:mr-3 rtl:ml-0">
+                                                    <p class="text-sm font-medium">New Follower</p>
+                                                    <p class="text-xs text-gray-500 dark:text-gray-400">ChefMichael started following you</p>
+                                                    <p class="text-xs text-gray-400 mt-1">1 day ago</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-4 border-t border-gray-200 dark:border-gray-700 text-center">
+                                        <a href="#" class="text-primary-600 dark:text-primary-400 text-sm font-medium">View All Notifications</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Hamburger Menu Button -->
+                            <button id="mobileMenuBtn" class="hamburger-menu text-gray-600 dark:text-gray-300">
+                                <i class="fas fa-bars text-2xl"></i>
+                            </button>
+                            
+                            <!-- Desktop User Menu -->
+                            <div class="admin hidden md:block relative">
+                                <button id="userMenuBtn" class="flex items-center space-x-2 rtl:space-x-reverse">
+                                    <div class="text-right rtl:text-left">
+                                        <p class="font-semibold text-sm">Chef Sarah</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">Food Blogger</p>
+                                    </div>
+                                    <i class="fas fa-chevron-down text-gray-500"></i>
+                                </button>
+                                
+                                <!-- User Dropdown -->
+                                <div id="userDropdown" class="hidden absolute right-0 rtl:left-0 rtl:right-auto mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 z-50">
+                                    <div class="p-4 border-b border-gray-200 dark:border-gray-700">
+                                        <p class="font-semibold">Chef Sarah</p>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400">chef.sarah@example.com</p>
+                                    </div>
+                                    <div class="p-2">
+                                        <a href="#" class="flex items-center space-x-2 rtl:space-x-reverse px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
+                                            <i class="fas fa-user text-gray-600 dark:text-gray-400 w-5"></i>
+                                            <span class="text-sm">Profile</span>
+                                        </a>
+                                        <a href="#" class="flex items-center space-x-2 rtl:space-x-reverse px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
+                                            <i class="fas fa-cog text-gray-600 dark:text-gray-400 w-5"></i>
+                                            <span class="text-sm">Settings</span>
+                                        </a>
+                                        <a href="login.html" class="flex items-center space-x-2 rtl:space-x-reverse px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
+                                            <i class="fas fa-sign-out-alt text-gray-600 dark:text-gray-400 w-5"></i>
+                                            <span class="text-sm">Logout</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile Search Bar -->
+                    <div id="mobileSearchBar" class="hidden md:hidden mt-3">
+                        <div class="search relative">
+                            <input type="text" placeholder="Search recipes, ingredients, chefs..." 
+                                   class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto p-4 md:p-6">
                 <!-- Welcome Section -->
                 <div class="gradient-bg rounded-xl p-6 mb-6 card-shadow">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
@@ -651,7 +765,7 @@
                 </div>
                 
                 <!-- Quick Stats -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                     <div class="bg-white dark:bg-gray-800 p-5 rounded-xl card-shadow">
                         <div class="flex justify-between items-start">
                             <div>
@@ -942,33 +1056,33 @@
                     </div>
                 </div>
             </main>
-        </div>
-    </div>
-    
-    <!-- Mobile Bottom Navigation (for mobile) -->
-    <div class="lg:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-2 px-4 flex justify-around items-center z-40">
-        <a href="#" class="flex flex-col items-center text-primary-600 dark:text-primary-400">
-            <i class="fas fa-home text-lg"></i>
-            <span class="text-xs mt-1">Home</span>
-        </a>
-        <a href="#" class="flex flex-col items-center text-gray-600 dark:text-gray-400">
-            <i class="fas fa-book text-lg"></i>
-            <span class="text-xs mt-1">Recipes</span>
-        </a>
-        <button class="flex flex-col items-center text-gray-600 dark:text-gray-400 -mt-6">
-            <div class="w-14 h-14 rounded-full bg-gradient-to-r from-primary-500 to-primary-700 flex items-center justify-center shadow-lg">
-                <i class="fas fa-plus text-white text-xl"></i>
+            
+            <!-- Mobile Bottom Navigation (for mobile) -->
+            <div class="lg:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-2 px-4 flex justify-around items-center z-40">
+                <a href="#" class="flex flex-col items-center text-primary-600 dark:text-primary-400">
+                    <i class="fas fa-home text-lg"></i>
+                    <span class="text-xs mt-1">Home</span>
+                </a>
+                <a href="#" class="flex flex-col items-center text-gray-600 dark:text-gray-400">
+                    <i class="fas fa-book text-lg"></i>
+                    <span class="text-xs mt-1">Recipes</span>
+                </a>
+                <button class="flex flex-col items-center text-gray-600 dark:text-gray-400 -mt-6">
+                    <div class="w-14 h-14 rounded-full bg-gradient-to-r from-primary-500 to-primary-700 flex items-center justify-center shadow-lg">
+                        <i class="fas fa-plus text-white text-xl"></i>
+                    </div>
+                    <span class="text-xs mt-1">Create</span>
+                </button>
+                <a href="#" class="flex flex-col items-center text-gray-600 dark:text-gray-400">
+                    <i class="fas fa-heart text-lg"></i>
+                    <span class="text-xs mt-1">Saved</span>
+                </a>
+                <button id="mobileProfileBtn" class="flex flex-col items-center text-gray-600 dark:text-gray-400">
+                    <i class="fas fa-user text-lg"></i>
+                    <span class="text-xs mt-1">Profile</span>
+                </button>
             </div>
-            <span class="text-xs mt-1">Create</span>
-        </button>
-        <a href="#" class="flex flex-col items-center text-gray-600 dark:text-gray-400">
-            <i class="fas fa-heart text-lg"></i>
-            <span class="text-xs mt-1">Saved</span>
-        </a>
-        <button id="mobileProfileBtn" class="flex flex-col items-center text-gray-600 dark:text-gray-400">
-            <i class="fas fa-user text-lg"></i>
-            <span class="text-xs mt-1">Profile</span>
-        </button>
+        </div>
     </div>
     
     <script>
@@ -986,14 +1100,14 @@
         function openMobileSidebar() {
             mobileSidebar.classList.add('active');
             mobileSidebarOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            document.body.classList.add('sidebar-open');
         }
         
         // Close mobile sidebar
         function closeMobileSidebar() {
             mobileSidebar.classList.remove('active');
             mobileSidebarOverlay.classList.remove('active');
-            document.body.style.overflow = '';
+            document.body.classList.remove('sidebar-open');
         }
         
         // Toggle mobile sidebar
@@ -1011,7 +1125,7 @@
             link.addEventListener('click', closeMobileSidebar);
         });
         
-        // Dark/Light Mode Toggle
+        // Dark/Light Mode Toggle (Desktop)
         const darkModeToggle = document.getElementById('darkModeToggle');
         const mobileDarkModeToggle = document.getElementById('mobileDarkModeToggle');
         
@@ -1037,7 +1151,7 @@
             darkModeToggle.checked = this.checked;
         });
         
-        // RTL/LTR Toggle
+        // RTL/LTR Toggle (Desktop)
         const rtlToggle = document.getElementById('rtlToggle');
         const mobileRtlToggle = document.getElementById('mobileRtlToggle');
         
@@ -1093,6 +1207,45 @@
             }
         });
         
+        // Mobile Search Toggle
+        const mobileSearchBtn = document.getElementById('mobileSearchBtn');
+        const mobileSearchBar = document.getElementById('mobileSearchBar');
+        
+        mobileSearchBtn.addEventListener('click', () => {
+            mobileSearchBar.classList.toggle('hidden');
+        });
+        
+        // Notifications Dropdown
+        const notificationsBtn = document.getElementById('notificationsBtn');
+        const notificationsDropdown = document.getElementById('notificationsDropdown');
+        
+        notificationsBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            notificationsDropdown.classList.toggle('hidden');
+        });
+        
+        // User Dropdown
+        const userMenuBtn = document.getElementById('userMenuBtn');
+        const userDropdown = document.getElementById('userDropdown');
+        
+        if (userMenuBtn) {
+            userMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                userDropdown.classList.toggle('hidden');
+            });
+        }
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            if (notificationsBtn && !notificationsBtn.contains(e.target) && notificationsDropdown && !notificationsDropdown.contains(e.target)) {
+                notificationsDropdown.classList.add('hidden');
+            }
+            
+            if (userMenuBtn && !userMenuBtn.contains(e.target) && userDropdown && !userDropdown.contains(e.target)) {
+                userDropdown.classList.add('hidden');
+            }
+        });
+        
         // Recipe card interaction
         const recipeCards = document.querySelectorAll('.recipe-card');
         recipeCards.forEach(card => {
@@ -1100,6 +1253,34 @@
                 if (!e.target.closest('button')) {
                     // Navigate to recipe detail page
                     console.log('Navigating to recipe detail');
+                }
+            });
+        });
+        
+        // Sidebar active state
+        const sidebarItems = document.querySelectorAll('.sidebar-item');
+        sidebarItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                if (!this.hasAttribute('href') || this.getAttribute('href') === '#') {
+                    e.preventDefault();
+                }
+                
+                // Update active state
+                sidebarItems.forEach(i => {
+                    if (i !== this) {
+                        i.classList.remove('active');
+                    }
+                });
+                
+                if (this.getAttribute('href') !== '#') {
+                    sidebarItems.forEach(i => i.classList.remove('active'));
+                } else {
+                    this.classList.add('active');
+                }
+                
+                // Close mobile sidebar if open
+                if (window.innerWidth < 1024) {
+                    closeMobileSidebar();
                 }
             });
         });

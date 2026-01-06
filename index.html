@@ -258,7 +258,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 @media (max-width: 360px) {
   #mobile-menu .login {
-    display: block !important;
+    display: none !important;
   }
   #mobile-menu .toggle {
     display: flex !important;
@@ -284,7 +284,16 @@ window.addEventListener("DOMContentLoaded", () => {
       font-size:10px;
     }
   }
-       
+  @media (max-width:420px){
+  .before\:to-emerald-600::before {
+    content: var(--tw-content);
+    --tw-gradient-to: #059669 var(--tw-gradient-to-position);
+    display:none;
+}
+.num{
+  display:none !important;
+}
+}     
        
     </style>
 </head>
@@ -1009,7 +1018,7 @@ window.addEventListener("DOMContentLoaded", () => {
         </div>
 
         <div class="relative flex justify-center">
-          <span class="w-10 h-10 rounded-full bg-white dark:bg-gray-800 
+          <span class="num w-10 h-10 rounded-full bg-white dark:bg-gray-800 
             border border-emerald-400 grid place-items-center font-bold text-emerald-600">
             1
           </span>
@@ -1019,7 +1028,7 @@ window.addEventListener("DOMContentLoaded", () => {
       <!-- Step -->
       <div class="relative grid md:grid-cols-2 gap-8 items-center mb-12 md:flex-row-reverse">
         <div class="order-2 md:order-1 flex justify-center">
-          <span class="w-10 h-10 rounded-full bg-white dark:bg-gray-800 
+          <span class="num w-10 h-10 rounded-full bg-white dark:bg-gray-800 
             border border-emerald-400 grid place-items-center font-bold text-emerald-600">
             2
           </span>
@@ -1051,7 +1060,7 @@ window.addEventListener("DOMContentLoaded", () => {
         </div>
 
         <div class="flex justify-center">
-          <span class="w-10 h-10 rounded-full bg-white dark:bg-gray-800 
+          <span class="num w-10 h-10 rounded-full bg-white dark:bg-gray-800 
             border border-emerald-400 grid place-items-center font-bold text-emerald-600">
             3
           </span>
@@ -1126,7 +1135,7 @@ Groww<span class="text-orange-500">Recipe</span>
         <li><a href="index.html">🏠 Home</a></li>
         <li><a href="about.html">ℹ️ About</a></li>
         <li><a href="blog.html">📰 Blog</a></li>
-        <li><a href="contact.html">📞 Contact Us</a></li>
+        <li><a href="contact.html">📞 Contact</a></li>
    
       </ul>
     </div>

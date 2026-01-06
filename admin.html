@@ -347,6 +347,11 @@
             main {
                 width: 100% !important;
             }
+            
+            /* Show mobile header logo */
+            .mobile-header-logo {
+                display: flex !important;
+            }
         }
         
         /* Show desktop sidebar on larger screens */
@@ -356,6 +361,11 @@
             }
             
             .hamburger-menu {
+                display: none !important;
+            }
+            
+            /* Hide mobile header logo on desktop */
+            .mobile-header-logo {
                 display: none !important;
             }
         }
@@ -405,6 +415,58 @@
             }
         }
         @media(max-width:800px){
+            .admin{
+                display:none !important;
+            }
+        }
+        
+        /* Theme & RTL Toggle Styles */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .toggle-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .toggle-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .toggle-container {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+        }
+         @media(max-width:420px){
+            .search{
+                display:none !important;
+            }
+        }
+          @media(max-width:1024px){
+            .toggle{
+                display:none !important;
+            }
+        }
+         @media(max-width:820px){
+            .admin{
+                display:none !important;
+            }
+        }
+          @media(max-width:1024px){
             .admin{
                 display:none !important;
             }
@@ -487,34 +549,31 @@
                 </div>
             </div>
             
-            <!-- Theme Toggles -->
+            <!-- Theme & RTL Toggles -->
             <div class="mt-6 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                 <h4 class="font-semibold text-sm mb-3">Display Settings</h4>
                 
-                <!-- Dark/Light Toggle -->
-                <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                <!-- Theme Toggle -->
+                <div class="toggle-item mb-4">
+                    <div class="theme-toggle">
                         <i class="fas fa-sun text-yellow-500"></i>
-                        <span class="text-sm">Light/Dark Mode</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="mobileDarkModeToggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <i class="fas fa-moon text-gray-700 dark:text-gray-300"></i>
                     </div>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="mobileDarkModeToggle">
-                        <span class="toggle-slider"></span>
-                    </label>
                 </div>
                 
-                <!-- RTL/LTR Toggle -->
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                        <span class="text-sm">Layout Direction</span>
-                    </div>
-                    <div class="flex items-center space-x-2 rtl:space-x-reverse">
-                        <span class="text-sm font-medium">LTR</span>
+                <!-- RTL Toggle -->
+                <div class="toggle-item">
+                    <div class="flex items-center">
+                        <span class="text-sm font-medium mr-2">LTR</span>
                         <label class="toggle-switch">
                             <input type="checkbox" id="mobileRtlToggle">
                             <span class="toggle-slider"></span>
                         </label>
-                        <span class="text-sm font-medium">RTL</span>
+                        <span class="text-sm font-medium ml-2">RTL</span>
                     </div>
                 </div>
             </div>
@@ -612,30 +671,56 @@
             <header class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                 <div class="px-4 sm:px-6 py-4">
                     <div class="flex items-center justify-between">
-                        <!-- Left: Mobile Logo -->
-                        <div class="flex items-center">
-                            <!-- Mobile Logo -->
-                            <div class="flex items-center">
-                                <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse">
-                                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center">
-                                        <i class="fas fa-utensils text-white text-lg"></i>
-                                    </div>
-                                    <span class="text-emerald-700 dark:text-emerald-300 text-xl font-bold">
-                                        Groww<span class="text-orange-500">Recipe</span>
-                                    </span>
-                                </a>
-                            </div>
-                            
-                            <!-- Desktop Search -->
-                            <div class="hidden md:block relative ml-4">
+                        <!-- Left: Mobile Logo (Only shows on mobile/tablet) -->
+                        <div class="mobile-header-logo hidden">
+                            <a href="index.html" class="flex items-center space-x-2 rtl:space-x-reverse">
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-r from-orange-500 to-red-500 flex items-center justify-center">
+                                    <i class="fas fa-utensils text-white text-lg"></i>
+                                </div>
+                                <span class="text-emerald-700 dark:text-emerald-300 text-xl font-bold">
+                                    Groww<span class="text-orange-500">Recipe</span>
+                                </span>
+                            </a>
+                        </div>
+                        
+                        <!-- Desktop Search (Centered on desktop) -->
+                        <div class="flex-1 max-w-2xl mx-auto">
+                            <div class="search relative">
                                 <input type="text" placeholder="Search..." 
-                                       class="w-64 pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500">
+                                       class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500">
                                 <i class="fas fa-search absolute left-3 top-3 text-gray-400 rtl:left-auto rtl:right-3"></i>
                             </div>
                         </div>
                         
                         <!-- Right: Controls & Hamburger Menu -->
-                        <div class="flex items-center space-x-4 rtl:space-x-reverse">
+                        <div class="flex items-center space-x-4 rtl:space-x-reverse ml-4">
+                            <!-- Theme & RTL Toggles for Desktop -->
+                            <div class="toggle hidden md:flex toggle-container">
+                                <!-- Theme Toggle -->
+                                <div class="toggle-item">
+                                    <div class="theme-toggle">
+                                        <i class="fas fa-sun text-yellow-500"></i>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="desktopDarkModeToggle">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                        <i class="fas fa-moon text-gray-700 dark:text-gray-300"></i>
+                                    </div>
+                                </div>
+                                
+                                <!-- RTL Toggle -->
+                                <div class="toggle-item">
+                                    <div class="flex items-center">
+                                        <span class="text-sm font-medium mr-2">LTR</span>
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" id="desktopRtlToggle">
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                        <span class="text-sm font-medium ml-2">RTL</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <!-- Mobile Search Button -->
                             <button id="mobileSearchBtn" class="md:hidden text-gray-600 dark:text-gray-300">
                                 <i class="fas fa-search text-xl"></i>
@@ -697,28 +782,40 @@
                                 </div>
                             </div>
                             
-                            <!-- Hamburger Menu Button (On the RIGHT side) -->
+                            <!-- Hamburger Menu Button -->
                             <button id="mobileMenuBtn" class="hamburger-menu text-gray-600 dark:text-gray-300">
                                 <i class="fas fa-bars text-2xl"></i>
                             </button>
                             
                             <!-- Desktop Admin Menu -->
-                            <div class=" admin hidden md:block relative">
-                                <button id="adminMenuBtn" class="flex items-center space-x-2 rtl:space-x-reverse">
+                            <div class="admin hidden md:block relative">
+                                <button id="adminMenuBtn" class="admin flex items-center space-x-2 rtl:space-x-reverse">
                                     <div class="text-right rtl:text-left">
                                         <p class="font-semibold text-sm">Admin User</p>
                                         <p class="text-xs text-gray-500 dark:text-gray-400">Super Admin</p>
                                     </div>
                                     <i class="fas fa-chevron-down text-gray-500"></i>
                                 </button>
-                                <!-- <button id="mobileMenuBtn" class="hamburger-menu text-gray-600 dark:text-gray-300">
-                                <i class="fas fa-bars text-2xl"></i>
-                            </button> -->
+                                
                                 <!-- Admin Dropdown -->
                                 <div id="adminDropdown" class="hidden absolute right-0 rtl:left-0 rtl:right-auto mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 z-50">
                                     <div class="p-4 border-b border-gray-200 dark:border-gray-700">
                                         <p class="font-semibold">Admin User</p>
                                         <p class="text-sm text-gray-500 dark:text-gray-400">admin@recipehub.com</p>
+                                    </div>
+                                    <div class="p-2">
+                                        <a href="#" class="flex items-center space-x-2 rtl:space-x-reverse p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                                            <i class="fas fa-user text-gray-600 dark:text-gray-400 w-5"></i>
+                                            <span>Profile</span>
+                                        </a>
+                                        <a href="#" class="flex items-center space-x-2 rtl:space-x-reverse p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                                            <i class="fas fa-cog text-gray-600 dark:text-gray-400 w-5"></i>
+                                            <span>Settings</span>
+                                        </a>
+                                        <a href="login.html" class="flex items-center space-x-2 rtl:space-x-reverse p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded">
+                                            <i class="fas fa-sign-out-alt text-gray-600 dark:text-gray-400 w-5"></i>
+                                            <span>Logout</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -1150,6 +1247,12 @@
         // Initialize with light mode (default)
         document.documentElement.classList.remove('dark');
         
+        // Get all toggle elements
+        const mobileDarkModeToggle = document.getElementById('mobileDarkModeToggle');
+        const mobileRtlToggle = document.getElementById('mobileRtlToggle');
+        const desktopDarkModeToggle = document.getElementById('desktopDarkModeToggle');
+        const desktopRtlToggle = document.getElementById('desktopRtlToggle');
+        
         // Mobile Sidebar Functions
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileSidebar = document.getElementById('mobileSidebar');
@@ -1182,24 +1285,24 @@
             link.addEventListener('click', closeMobileSidebar);
         });
         
-        // Dark/Light Mode Toggle
-        const darkModeToggle = document.getElementById('mobileDarkModeToggle');
-        
-        darkModeToggle.addEventListener('change', function() {
-            if (this.checked) {
+        // Function to toggle dark mode
+        function toggleDarkMode(isDark) {
+            if (isDark) {
                 document.documentElement.classList.add('dark');
                 localStorage.setItem('theme', 'dark');
             } else {
                 document.documentElement.classList.remove('dark');
                 localStorage.setItem('theme', 'light');
             }
-        });
+            
+            // Update all dark mode toggles
+            if (mobileDarkModeToggle) mobileDarkModeToggle.checked = isDark;
+            if (desktopDarkModeToggle) desktopDarkModeToggle.checked = isDark;
+        }
         
-        // RTL/LTR Toggle
-        const rtlToggle = document.getElementById('mobileRtlToggle');
-        
-        rtlToggle.addEventListener('change', function() {
-            if (this.checked) {
+        // Function to toggle RTL
+        function toggleRTL(isRTL) {
+            if (isRTL) {
                 document.documentElement.dir = 'rtl';
                 document.body.classList.remove('ltr');
                 document.body.classList.add('rtl');
@@ -1210,7 +1313,37 @@
                 document.body.classList.add('ltr');
                 localStorage.setItem('direction', 'ltr');
             }
-        });
+            
+            // Update all RTL toggles
+            if (mobileRtlToggle) mobileRtlToggle.checked = isRTL;
+            if (desktopRtlToggle) desktopRtlToggle.checked = isRTL;
+        }
+        
+        // Dark Mode Toggle Event Listeners
+        if (mobileDarkModeToggle) {
+            mobileDarkModeToggle.addEventListener('change', function() {
+                toggleDarkMode(this.checked);
+            });
+        }
+        
+        if (desktopDarkModeToggle) {
+            desktopDarkModeToggle.addEventListener('change', function() {
+                toggleDarkMode(this.checked);
+            });
+        }
+        
+        // RTL Toggle Event Listeners
+        if (mobileRtlToggle) {
+            mobileRtlToggle.addEventListener('change', function() {
+                toggleRTL(this.checked);
+            });
+        }
+        
+        if (desktopRtlToggle) {
+            desktopRtlToggle.addEventListener('change', function() {
+                toggleRTL(this.checked);
+            });
+        }
         
         // Check for saved preferences
         window.addEventListener('DOMContentLoaded', () => {
@@ -1219,16 +1352,12 @@
             
             // Apply saved theme
             if (savedTheme === 'dark') {
-                document.documentElement.classList.add('dark');
-                darkModeToggle.checked = true;
+                toggleDarkMode(true);
             }
             
             // Apply saved direction
             if (savedDirection === 'rtl') {
-                document.documentElement.dir = 'rtl';
-                document.body.classList.remove('ltr');
-                document.body.classList.add('rtl');
-                rtlToggle.checked = true;
+                toggleRTL(true);
             }
         });
         
@@ -1236,18 +1365,22 @@
         const mobileSearchBtn = document.getElementById('mobileSearchBtn');
         const mobileSearchBar = document.getElementById('mobileSearchBar');
         
-        mobileSearchBtn.addEventListener('click', () => {
-            mobileSearchBar.classList.toggle('hidden');
-        });
+        if (mobileSearchBtn) {
+            mobileSearchBtn.addEventListener('click', () => {
+                mobileSearchBar.classList.toggle('hidden');
+            });
+        }
         
         // Notifications Dropdown
         const notificationsBtn = document.getElementById('notificationsBtn');
         const notificationsDropdown = document.getElementById('notificationsDropdown');
         
-        notificationsBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            notificationsDropdown.classList.toggle('hidden');
-        });
+        if (notificationsBtn) {
+            notificationsBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                notificationsDropdown.classList.toggle('hidden');
+            });
+        }
         
         // Admin Dropdown
         const adminMenuBtn = document.getElementById('adminMenuBtn');

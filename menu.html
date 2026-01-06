@@ -258,7 +258,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
 @media (max-width: 360px) {
   #mobile-menu .login {
-    display: block !important;
+    display: none !important;
   }
   #mobile-menu .toggle {
     display: flex !important;
@@ -613,33 +613,9 @@ window.addEventListener("DOMContentLoaded", () => {
   <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow-sm hover:shadow-lg transition">
 
     <!-- Top Row -->
-    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-
-      <!-- Category Pills -->
-      <div class="flex flex-wrap gap-3">
-        <button class="px-4 py-2 rounded-full bg-orange-500 text-white font-medium hover:bg-orange-600 active:scale-95 transition">
-          All Dishes
-        </button>
-
-        <button class="px-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-orange-50 dark:hover:bg-orange-500/10 hover:border-orange-400 transition">
-          🍕 Snacks
-        </button>
-
-        <button class="px-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-orange-50 dark:hover:bg-orange-500/10 hover:border-orange-400 transition">
-          🥗 Healthy
-        </button>
-
-        <button class="px-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-orange-50 dark:hover:bg-orange-500/10 hover:border-orange-400 transition">
-          🍜 Main Course
-        </button>
-
-        <button class="px-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-orange-50 dark:hover:bg-orange-500/10 hover:border-orange-400 transition">
-          🍰 Desserts
-        </button>
-      </div>
-
+   
       <!-- Search Box -->
-      <div class="relative w-full lg:w-80">
+      <div class="relative w-full lg:w-100">
         <input
           type="text"
           placeholder="🔍 Search dishes or ingredients..."
@@ -648,25 +624,7 @@ window.addEventListener("DOMContentLoaded", () => {
       </div>
     </div>
 
-    <!-- Sub Filters -->
-    <div class="flex flex-wrap gap-3 mt-5">
-      <span class="px-3 py-1 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-sm hover:bg-orange-50 dark:hover:bg-orange-500/10 transition cursor-pointer">
-        ⭐ Popular
-      </span>
-
-      <span class="px-3 py-1 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-sm hover:bg-orange-50 dark:hover:bg-orange-500/10 transition cursor-pointer">
-        🕒 Quick Recipes
-      </span>
-
-      <span class="px-3 py-1 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-sm hover:bg-orange-50 dark:hover:bg-orange-500/10 transition cursor-pointer">
-        🌱 Veg Only
-      </span>
-
-      <span class="px-3 py-1 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 text-sm hover:bg-orange-50 dark:hover:bg-orange-500/10 transition cursor-pointer">
-        🔥 Spicy Specials
-      </span>
-    </div>
-
+    
   </div>
 </section>
 <section class="w-full max-w-7xl mx-auto px-4 py-12">
@@ -1057,14 +1015,7 @@ window.addEventListener("DOMContentLoaded", () => {
     <p class="text-gray-500 mt-1">Find your favorite dishes from our curated menu</p>
   </div>
 
-  <!-- Category Tabs -->
-  <div class="flex flex-wrap justify-center gap-3 mb-10">
-    <button class="px-4 py-2 rounded-full bg-black text-white text-sm font-medium">All</button>
-    <button class="px-4 py-2 rounded-full border text-sm hover:bg-black hover:text-white transition">Starters</button>
-    <button class="px-4 py-2 rounded-full border text-sm hover:bg-black hover:text-white transition">Main Course</button>
-    <button class="px-4 py-2 rounded-full border text-sm hover:bg-black hover:text-white transition">Desserts</button>
-    <button class="px-4 py-2 rounded-full border text-sm hover:bg-black hover:text-white transition">Beverages</button>
-  </div>
+
 
   <!-- Menu Grid -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -1197,7 +1148,7 @@ Groww<span class="text-orange-500">Recipe</span>
         <li><a href="index.html">🏠 Home</a></li>
         <li><a href="about.html">ℹ️ About</a></li>
         <li><a href="blog.html">📰 Blog</a></li>
-        <li><a href="contact.html">📞 Contact Us</a></li>
+        <li><a href="contact.html">📞 Contact </a></li>
    
       </ul>
     </div>
