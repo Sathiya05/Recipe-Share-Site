@@ -7,6 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
           <link rel="icon" href="growwpark_logo.jpg">
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 
     <script>
         tailwind.config = {
@@ -239,37 +241,37 @@ window.addEventListener("DOMContentLoaded", () => {
                 font-size: 13px;
           }
         }
-@media (max-width: 800px) {
+/* @media (max-width: 800px) {
   nav > .flex .toggle,
   nav > .flex .login {
     display: none !important;
   }
-}
+} */
 
-@media (max-width: 390px) {
+/* @media (max-width: 390px) {
   #mobile-menu .login {
     display: flex !important;
   }
   #mobile-menu .toggle {
     display: flex !important;
   }
-}
+} */
 
 
-@media (max-width: 360px) {
+/* @media (max-width: 360px) {
   #mobile-menu .login {
     display: none !important;
   }
   #mobile-menu .toggle {
     display: flex !important;
   }
-}
-@media (max-width:820px){
+} */
+/* @media (max-width:820px){
    #rtl-toggle,
   .login {
     display: none !important;
   }
-}
+} */
 .active-link {
   color: #ea580c !important; /* orange-600 */
 
@@ -293,7 +295,8 @@ window.addEventListener("DOMContentLoaded", () => {
 .num{
   display:none !important;
 }
-}     
+} 
+    
        
     </style>
 </head>
@@ -314,8 +317,8 @@ window.addEventListener("DOMContentLoaded", () => {
                     </a>
                 </div>
 
-                <!-- Centered Navigation Links - Hidden on mobile -->
-                <div class=" nav hidden lg:flex flex-1 justify-center">
+                <!-- Centered Navigation Links - Hidden on mobile and at 1024px -->
+                <div class="nav hidden xl:flex flex-1 justify-center">
                     <div class="link flex items-center rtl:space-x-reverse">
                         <!-- Home Dropdown -->
                         <div class="relative">
@@ -333,7 +336,6 @@ window.addEventListener("DOMContentLoaded", () => {
                                     <i class="fas mr-2 rtl:mr-0 rtl:ml-2"></i>
                                     Home 2
                                 </a>
-                             
                             </div>
                         </div>
                           <!-- Simple navigation links -->
@@ -384,15 +386,13 @@ window.addEventListener("DOMContentLoaded", () => {
                             <i class="fas fa-plus-circle mr-1 rtl:mr-0 rtl:ml-1"></i>
                             Share Recipe
                         </a>
-
-                   
                     </div>
                 </div>
 
                 <!-- Toggles on the right -->
                 <div class="flex items-center space-x-4 rtl:space-x-reverse">
-                    <!-- RTL Toggle - Hidden on small screens -->
-                    <button id="rtl-toggle" onclick="toggleRTL()" class="hidden sm:flex relative w-14 h-7 items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer transition-all-300">
+                    <!-- RTL Toggle - Hidden on mobile and tablet -->
+                    <button id="rtl-toggle" onclick="toggleRTL()" class="hidden lg:flex relative w-14 h-7 items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer transition-all-300">
                         <div class="absolute left-1 rtl:left-auto rtl:right-1 w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center">
                             <span class="text-xs font-bold text-gray-800">LTR</span>
                         </div>
@@ -402,8 +402,8 @@ window.addEventListener("DOMContentLoaded", () => {
                         </div>
                     </button>
 
-                    <!-- Light/Dark Mode Toggle -->
-                    <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="relative w-14 h-7 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer transition-all-300">
+                    <!-- Light/Dark Mode Toggle - Hidden on mobile and tablet -->
+                    <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="hidden lg:flex relative w-14 h-7 items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer transition-all-300">
                         <div class="absolute left-1 rtl:left-auto rtl:right-1 w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center">
                             <i class="fas fa-sun text-yellow-500 text-xs"></i>
                         </div>
@@ -413,8 +413,8 @@ window.addEventListener("DOMContentLoaded", () => {
                         </div>
                     </button>
 
-                    <!-- User avatar - Hidden on small screens -->
-                    <div class=" dropdown relative">
+                    <!-- User avatar - Hidden on mobile and tablet -->
+                    <div class="dropdown relative hidden lg:block">
                         <button class="dropdown-btn flex items-center space-x-2 rtl:space-x-reverse focus:outline-none">
                             <div class="w-9 h-9 rounded-full bg-gradient-to-r from-orange-400 to-red-500 flex items-center justify-center text-white font-bold">
                                 <i class="fas fa-user"></i>
@@ -433,19 +433,18 @@ window.addEventListener("DOMContentLoaded", () => {
                                 <i class="fas fa-cog mr-2 rtl:mr-0 rtl:ml-2"></i>
                                 Sign Up
                             </a>
-                          
                         </div>
                     </div>
 
-                    <!-- Mobile menu button -->
-                    <button id="mobile-menu-button" class="lg:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <!-- Mobile menu button - Show at 1024px and below -->
+                    <button id="mobile-menu-button" class="xl:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Mobile menu - Fully responsive with dropdowns -->
-            <div id="mobile-menu" class="lg:hidden hidden py-4 border-t border-gray-200 dark:border-gray-700">
+            <!-- Mobile menu - Show at 1024px and below -->
+            <div id="mobile-menu" class="xl:hidden hidden py-4 border-t border-gray-200 dark:border-gray-700">
                 <div class="flex flex-col space-y-2">
                     <!-- Mobile Home Dropdown -->
                     <div class="mobile-dropdown">
@@ -514,7 +513,6 @@ window.addEventListener("DOMContentLoaded", () => {
                         </div>
                     </div>
 
-                
                     <a href="sharecipe.html" class="flex items-center text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-3 px-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
                         <i class="fas mr-1 rtl:mr-0 rtl:ml-3"></i>
                         <span>Share Recipe</span>
@@ -522,8 +520,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     
                     <!-- Mobile user menu -->
                     <div class="login pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
-                    
-                          <a href="login.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+                        <a href="login.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
                                 <i class="fas fa-user mr-2 rtl:mr-0 rtl:ml-2"></i>
                                 Log In
                             </a>
@@ -531,9 +528,6 @@ window.addEventListener("DOMContentLoaded", () => {
                                 <i class="fas fa-cog mr-2 rtl:mr-0 rtl:ml-2"></i>
                                 Sign Up
                             </a>
-                           
-                        
-                            
                     </div>
 
                     <div class="pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
@@ -542,9 +536,16 @@ window.addEventListener("DOMContentLoaded", () => {
                             <button onclick="toggleRTL()" class="relative w-12 h-6 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer transition-all-300">
                                 <div class="absolute left-1 rtl:left-auto rtl:right-1 w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300"></div>
                             </button>
+                               <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="relative w-14 h-7 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer transition-all-300">
+                        <div class="absolute left-1 rtl:left-auto rtl:right-1 w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center">
+                            <i class="fas fa-sun text-yellow-500 text-xs"></i>
                         </div>
-                        
-                      
+                        <div class="flex w-full justify-between px-1">
+                            <i class="fas fa-sun text-xs text-yellow-500"></i>
+                            <i class="fas fa-moon text-xs text-blue-400"></i>
+                        </div>
+                    </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -570,7 +571,7 @@ window.addEventListener("DOMContentLoaded", () => {
       <span class="px-4 py-1 rounded-full text-sm font-semibold
                    bg-emerald-100 text-emerald-700
                    dark:bg-emerald-500/20 dark:text-emerald-300">
-        🍽️ Share • Discover • Cook Together
+        Share • Discover • Cook Together
       </span>
 
       <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
@@ -587,7 +588,7 @@ window.addEventListener("DOMContentLoaded", () => {
       <div class="flex flex-col sm:flex-row gap-3 max-w-xl">
         <input
           type="text"
-          placeholder="🔍 Search recipes — e.g., pasta, vegan, breakfast"
+          placeholder=" Search recipes — e.g., pasta, vegan, breakfast"
           class="w-full px-4 py-3 rounded-xl border border-gray-300
                  dark:border-gray-700 bg-white/70 dark:bg-white/10
                  backdrop-blur placeholder-gray-500 focus:outline-none
@@ -601,16 +602,16 @@ window.addEventListener("DOMContentLoaded", () => {
       <!-- TAGS -->
       <div class="flex flex-wrap gap-2">
         <span class="px-3 py-1 text-sm rounded-full bg-white dark:bg-white/10 border">
-          🥗 Vegetarian
+           Vegetarian
         </span>
         <span class="px-3 py-1 text-sm rounded-full bg-white dark:bg-white/10 border">
-          🍰 Desserts
+           Desserts
         </span>
         <span class="px-3 py-1 text-sm rounded-full bg-white dark:bg-white/10 border">
-          🌶️ Spicy Dishes
+           Spicy Dishes
         </span>
         <span class="px-3 py-1 text-sm rounded-full bg-white dark:bg-white/10 border">
-          ⏳ Quick Meals
+           Quick Meals
         </span>
       </div>
 
@@ -618,7 +619,7 @@ window.addEventListener("DOMContentLoaded", () => {
       <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
         <button class="px-6 py-3 rounded-xl bg-orange-500 hover:bg-orange-600
                        text-white font-semibold shadow">
-          ➕ Submit Your Recipe
+          Submit Your Recipe
         </button>
 
         <div class="flex items-center gap-6 text-gray-700 dark:text-gray-300">
@@ -644,12 +645,12 @@ window.addEventListener("DOMContentLoaded", () => {
       <!-- Floating mini cards -->
       <div class="absolute -bottom-6 -left-4 bg-white/80 dark:bg-white/10
                   backdrop-blur border rounded-2xl px-4 py-3 shadow">
-        ⭐ 4.9 • Top Rated Recipes
+         4.9 • Top Rated Recipes
       </div>
 
       <div class="absolute top-6 -right-6 bg-white/80 dark:bg-white/10
                   backdrop-blur border rounded-2xl px-4 py-3 shadow">
-        👩‍🍳 500+ New Chefs Joined
+         500+ New Chefs Joined
       </div>
     </div>
 
@@ -667,7 +668,7 @@ window.addEventListener("DOMContentLoaded", () => {
       <span class="px-4 py-1 rounded-full text-sm font-semibold
                    bg-emerald-100 text-emerald-700
                    dark:bg-emerald-500/20 dark:text-emerald-300">
-        🍴 Explore by Taste & Lifestyle
+         Explore by Taste & Lifestyle
       </span>
 
       <h2 class="text-3xl md:text-4xl font-extrabold">
@@ -763,7 +764,7 @@ window.addEventListener("DOMContentLoaded", () => {
       <span class="px-4 py-1 rounded-full text-sm font-semibold
                    bg-orange-100 text-orange-700
                    dark:bg-orange-500/20 dark:text-orange-300">
-        ⭐ Most Loved by the Community
+         Most Loved by the Community
       </span>
 
       <h2 class="text-3xl md:text-4xl font-extrabold">
@@ -787,7 +788,7 @@ window.addEventListener("DOMContentLoaded", () => {
         <div class="p-5 space-y-3">
           <div class="flex items-center justify-between">
             <span class="px-3 py-1 text-xs rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300">
-              🥗 Healthy
+              Healthy
             </span>
             <span class="text-sm">⭐ 4.9</span>
           </div>
@@ -795,8 +796,8 @@ window.addEventListener("DOMContentLoaded", () => {
           <h3 class="font-bold text-lg">Grilled Veggie Pasta Bowl</h3>
 
           <div class="flex items-center justify-between text-sm text-gray-600 dark:text-gray-300">
-            <span>⏳ 25 mins</span>
-            <span>👤 by Emma</span>
+            <span> 25 mins</span>
+            <span> by Emma</span>
           </div>
 
           <button class="w-full mt-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold">
@@ -814,7 +815,7 @@ window.addEventListener("DOMContentLoaded", () => {
         <div class="p-5 space-y-3">
           <div class="flex items-center justify-between">
             <span class="px-3 py-1 text-xs rounded-full bg-orange-100 text-orange-700 dark:bg-orange-500/20 dark:text-orange-300">
-              🍰 Dessert
+              Dessert
             </span>
             <span class="text-sm">⭐ 4.8</span>
           </div>
@@ -822,8 +823,8 @@ window.addEventListener("DOMContentLoaded", () => {
           <h3 class="font-bold text-lg">Classic Chocolate Lava Cake</h3>
 
           <div class="flex items-center justify-between text-sm text-gray-600 dark:text-gray-300">
-            <span>⏳ 15 mins</span>
-            <span>👤 by Aiden</span>
+            <span> 15 mins</span>
+            <span> by Aiden</span>
           </div>
 
           <button class="w-full mt-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold">
@@ -841,7 +842,7 @@ window.addEventListener("DOMContentLoaded", () => {
         <div class="p-5 space-y-3">
           <div class="flex items-center justify-between">
             <span class="px-3 py-1 text-xs rounded-full bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-300">
-              🌶️ Spicy
+               Spicy
             </span>
             <span class="text-sm">⭐ 5.0</span>
           </div>
@@ -849,8 +850,8 @@ window.addEventListener("DOMContentLoaded", () => {
           <h3 class="font-bold text-lg">Fiery Chicken Tikka Wrap</h3>
 
           <div class="flex items-center justify-between text-sm text-gray-600 dark:text-gray-300">
-            <span>⏳ 30 mins</span>
-            <span>👤 by Noah</span>
+            <span> 30 mins</span>
+            <span> by Noah</span>
           </div>
 
           <button class="w-full mt-2 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold">
@@ -873,7 +874,7 @@ window.addEventListener("DOMContentLoaded", () => {
       <span class="px-4 py-1 rounded-full text-sm font-semibold
                    bg-emerald-100 text-emerald-700
                    dark:bg-emerald-500/20 dark:text-emerald-300">
-        👨‍🍳 Meet Our Best Home Chefs
+         Meet Our Best Home Chefs
       </span>
 
       <h2 class="text-3xl md:text-4xl font-extrabold">
@@ -902,8 +903,8 @@ window.addEventListener("DOMContentLoaded", () => {
         </p>
 
         <div class="flex items-center justify-center gap-6 mt-3 text-sm">
-          <span>📘 42 Recipes</span>
-          <span>❤️ 3.2k Likes</span>
+          <span>42 Recipes</span>
+          <span> 3.2k Likes</span>
         </div>
 
         <button class="w-full mt-4 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold">
@@ -925,8 +926,8 @@ window.addEventListener("DOMContentLoaded", () => {
         </p>
 
         <div class="flex items-center justify-center gap-6 mt-3 text-sm">
-          <span>📘 37 Recipes</span>
-          <span>❤️ 2.8k Likes</span>
+          <span> 37 Recipes</span>
+          <span> 2.8k Likes</span>
         </div>
 
         <button class="w-full mt-4 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold">
@@ -948,8 +949,8 @@ window.addEventListener("DOMContentLoaded", () => {
         </p>
 
         <div class="flex items-center justify-center gap-6 mt-3 text-sm">
-          <span>📘 50 Recipes</span>
-          <span>❤️ 4.1k Likes</span>
+          <span> 50 Recipes</span>
+          <span>4.1k Likes</span>
         </div>
 
         <button class="w-full mt-4 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold">
@@ -971,8 +972,8 @@ window.addEventListener("DOMContentLoaded", () => {
         </p>
 
         <div class="flex items-center justify-center gap-6 mt-3 text-sm">
-          <span>📘 29 Recipes</span>
-          <span>❤️ 2.5k Likes</span>
+          <span> 29 Recipes</span>
+          <span> 2.5k Likes</span>
         </div>
 
         <button class="w-full mt-4 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold">
@@ -1013,7 +1014,7 @@ window.addEventListener("DOMContentLoaded", () => {
           </p>
           <span class="inline-block mt-3 text-sm px-3 py-1 rounded-full 
             bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-200">
-            🔪 Prep Mode
+             Prep Mode
           </span>
         </div>
 
@@ -1041,7 +1042,7 @@ window.addEventListener("DOMContentLoaded", () => {
           </p>
           <span class="inline-block mt-3 text-sm px-3 py-1 rounded-full 
             bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-200">
-            🍳 Live Cooking Mode
+             Live Cooking Mode
           </span>
         </div>
       </div>
@@ -1055,7 +1056,7 @@ window.addEventListener("DOMContentLoaded", () => {
           </p>
           <span class="inline-block mt-3 text-sm px-3 py-1 rounded-full 
             bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-200">
-            🌟 Community Review Mode
+             Community Review Mode
           </span>
         </div>
 
@@ -1099,9 +1100,9 @@ Groww<span class="text-orange-500">Recipe</span>
 
       <!-- Social -->
    <div class="mt-5 flex gap-3">
-        <a class="w-9 h-9 grid place-items-center rounded-lg bg-black/10 hover:bg-white/20">🐦</a>
-        <a class="w-9 h-9 grid place-items-center rounded-lg bg-black/10 hover:bg-white/20">🌐</a>
-        <a class="w-9 h-9 grid place-items-center rounded-lg bg-black/10 hover:bg-white/20">▶️</a>
+        <a class="w-9 h-9 grid place-items-center rounded-lg bg-black/10 hover:bg-white/20"><i class="bi bi-twitter-x"></i></a>
+        <a class="w-9 h-9 grid place-items-center rounded-lg bg-black/10 hover:bg-white/20"><i class="bi bi-linkedin"></i></a>
+        <a class="w-9 h-9 grid place-items-center rounded-lg bg-black/10 hover:bg-white/20"><i class="bi bi-youtube"></i></a>
       </div>
     </div>
 
@@ -1109,10 +1110,10 @@ Groww<span class="text-orange-500">Recipe</span>
     <div>
       <h3 class="text-lg font-semibold text-black dark:text-white mb-3">Popular Categories</h3>
       <ul class="space-y-2 text-sm dark:text-white">
-        <li>🍕 Quick & Easy Meals</li>
-        <li>🥗 Vegan & Healthy</li>
-        <li>🍰 Desserts & Baking</li>
-        <li>🥤 Drinks & Smoothies</li>
+        <li> Quick & Easy Meals</li>
+        <li> Vegan & Healthy</li>
+        <li>Desserts & Baking</li>
+        <li>Drinks & Smoothies</li>
       </ul>
     </div>
 
@@ -1120,10 +1121,10 @@ Groww<span class="text-orange-500">Recipe</span>
     <div>
       <h3 class="text-lg font-semibold text-black dark:text-white mb-3">Community</h3>
       <ul class="space-y-2 text-sm dark:text-white">
-        <li>👩‍🍳 Become a Creator</li>
-        <li>⭐ Top Home Chefs</li>
-        <li>📦 Submit Your Recipe</li>
-        <li>❤️ Saved Recipes</li>
+        <li>Become a Creator</li>
+        <li>Top Home Chefs</li>
+        <li>Submit Your Recipe</li>
+        <li>Saved Recipes</li>
       
       </ul>
     </div>
@@ -1132,10 +1133,10 @@ Groww<span class="text-orange-500">Recipe</span>
     <div>
       <h3 class="text-lg font-semibold text-black dark:text-white mb-3">Quick Links</h3>
       <ul class="space-y-2 text-sm dark:text-white">
-        <li><a href="index.html">🏠 Home</a></li>
-        <li><a href="about.html">ℹ️ About</a></li>
-        <li><a href="blog.html">📰 Blog</a></li>
-        <li><a href="contact.html">📞 Contact</a></li>
+        <li><a href="index.html"> Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="blog.html"> Blog</a></li>
+        <li><a href="contact.html"> Contact</a></li>
    
       </ul>
     </div>

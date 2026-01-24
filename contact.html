@@ -7,6 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
           <link rel="icon" href="growwpark_logo.jpg">
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 
     <script>
         tailwind.config = {
@@ -239,7 +241,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 font-size: 13px;
           }
         }
-@media (max-width: 800px) {
+/* @media (max-width: 800px) {
   nav > .flex .toggle,
   nav > .flex .login {
     display: none !important;
@@ -269,7 +271,7 @@ window.addEventListener("DOMContentLoaded", () => {
   .login {
     display: none !important;
   }
-}
+} */
 
  .active-link {
   color: #ea580c !important; /* orange-600 */
@@ -304,18 +306,18 @@ window.addEventListener("DOMContentLoaded", () => {
                     </a>
                 </div>
 
-                <!-- Centered Navigation Links - Hidden on mobile -->
-                <div class=" nav hidden lg:flex flex-1 justify-center">
+                <!-- Centered Navigation Links - Hidden on mobile and at 1024px -->
+                <div class="nav hidden xl:flex flex-1 justify-center">
                     <div class="link flex items-center rtl:space-x-reverse">
                         <!-- Home Dropdown -->
                         <div class="relative">
                             <button class="dropdown-btn flex items-center space-x-1 rtl:space-x-reverse text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
-                                <i class="fas "></i>
-                                <span>Home</span>
-                                <i class="fas fa-chevron-down text-xs mt-0.5"></i>
+                                <i class="text-orange-500 fas "></i>
+                                <span class="text-orange-500">Home</span>
+                                <i class="text-orange-500 fas fa-chevron-down text-xs mt-0.5"></i>
                             </button>
                             <div class="dropdown-content hidden absolute mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50">
-                                <a href="index.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+                                <a href="index.html" class="nav-link block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
                                     <i class="fas mr-2 rtl:mr-0 rtl:ml-2"></i>
                                   Home 1
                                 </a>
@@ -323,7 +325,6 @@ window.addEventListener("DOMContentLoaded", () => {
                                     <i class="fas mr-2 rtl:mr-0 rtl:ml-2"></i>
                                     Home 2
                                 </a>
-                             
                             </div>
                         </div>
                           <!-- Simple navigation links -->
@@ -347,7 +348,7 @@ window.addEventListener("DOMContentLoaded", () => {
                             <i class="fas mr-1 rtl:mr-0 rtl:ml-1"></i>
                             FAQ
                         </a>
-                          <a href="contact.html" class="nav-link text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                          <a href="contact.html" class="text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
                             <i class="fas mr-1 rtl:mr-0 rtl:ml-1"></i>
                             Contact
                         </a>
@@ -374,15 +375,13 @@ window.addEventListener("DOMContentLoaded", () => {
                             <i class="fas fa-plus-circle mr-1 rtl:mr-0 rtl:ml-1"></i>
                             Share Recipe
                         </a>
-
-                   
                     </div>
                 </div>
 
                 <!-- Toggles on the right -->
                 <div class="flex items-center space-x-4 rtl:space-x-reverse">
-                    <!-- RTL Toggle - Hidden on small screens -->
-                    <button id="rtl-toggle" onclick="toggleRTL()" class="hidden sm:flex relative w-14 h-7 items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer transition-all-300">
+                    <!-- RTL Toggle - Hidden on mobile and tablet -->
+                    <button id="rtl-toggle" onclick="toggleRTL()" class="hidden lg:flex relative w-14 h-7 items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer transition-all-300">
                         <div class="absolute left-1 rtl:left-auto rtl:right-1 w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center">
                             <span class="text-xs font-bold text-gray-800">LTR</span>
                         </div>
@@ -392,8 +391,8 @@ window.addEventListener("DOMContentLoaded", () => {
                         </div>
                     </button>
 
-                    <!-- Light/Dark Mode Toggle -->
-                    <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="relative w-14 h-7 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer transition-all-300">
+                    <!-- Light/Dark Mode Toggle - Hidden on mobile and tablet -->
+                    <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="hidden lg:flex relative w-14 h-7 items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer transition-all-300">
                         <div class="absolute left-1 rtl:left-auto rtl:right-1 w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center">
                             <i class="fas fa-sun text-yellow-500 text-xs"></i>
                         </div>
@@ -403,8 +402,8 @@ window.addEventListener("DOMContentLoaded", () => {
                         </div>
                     </button>
 
-                    <!-- User avatar - Hidden on small screens -->
-                    <div class=" dropdown relative">
+                    <!-- User avatar - Hidden on mobile and tablet -->
+                    <div class="dropdown relative hidden lg:block">
                         <button class="dropdown-btn flex items-center space-x-2 rtl:space-x-reverse focus:outline-none">
                             <div class="w-9 h-9 rounded-full bg-gradient-to-r from-orange-400 to-red-500 flex items-center justify-center text-white font-bold">
                                 <i class="fas fa-user"></i>
@@ -423,19 +422,18 @@ window.addEventListener("DOMContentLoaded", () => {
                                 <i class="fas fa-cog mr-2 rtl:mr-0 rtl:ml-2"></i>
                                 Sign Up
                             </a>
-                          
                         </div>
                     </div>
 
-                    <!-- Mobile menu button -->
-                    <button id="mobile-menu-button" class="lg:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <!-- Mobile menu button - Show at 1024px and below -->
+                    <button id="mobile-menu-button" class="xl:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Mobile menu - Fully responsive with dropdowns -->
-            <div id="mobile-menu" class="lg:hidden hidden py-4 border-t border-gray-200 dark:border-gray-700">
+            <!-- Mobile menu - Show at 1024px and below -->
+            <div id="mobile-menu" class="xl:hidden hidden py-4 border-t border-gray-200 dark:border-gray-700">
                 <div class="flex flex-col space-y-2">
                     <!-- Mobile Home Dropdown -->
                     <div class="mobile-dropdown">
@@ -447,7 +445,7 @@ window.addEventListener("DOMContentLoaded", () => {
                             <i class="fas fa-chevron-down text-sm transition-transform duration-300"></i>
                         </button>
                         <div class="mobile-dropdown-content hidden pl-10 rtl:pl-0 rtl:pr-10 pr-4 mt-1 space-y-1">
-                             <a href="index.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+                             <a href="index.html" class="mobile-nav-link block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
                                     <i class="fas mr-2 rtl:mr-0 rtl:ml-2"></i>
                                   Home 1
                                 </a>
@@ -478,7 +476,7 @@ window.addEventListener("DOMContentLoaded", () => {
                             <i class="fas mr-1 rtl:mr-0 rtl:ml-1"></i>
                             FAQ
                         </a>
-                          <a href="contact.html" class="nav-link text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
+                          <a href="contact.html" class="text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
                             <i class="fas mr-1 rtl:mr-0 rtl:ml-1"></i>
                             Contact
                         </a>
@@ -504,7 +502,6 @@ window.addEventListener("DOMContentLoaded", () => {
                         </div>
                     </div>
 
-                
                     <a href="sharecipe.html" class="flex items-center text-gray-700 dark:text-gray-300 hover:text-orange-500 dark:hover:text-orange-400 font-medium py-3 px-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all-300">
                         <i class="fas mr-1 rtl:mr-0 rtl:ml-3"></i>
                         <span>Share Recipe</span>
@@ -512,8 +509,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     
                     <!-- Mobile user menu -->
                     <div class="login pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
-                    
-                          <a href="login.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+                        <a href="login.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
                                 <i class="fas fa-user mr-2 rtl:mr-0 rtl:ml-2"></i>
                                 Log In
                             </a>
@@ -521,9 +517,6 @@ window.addEventListener("DOMContentLoaded", () => {
                                 <i class="fas fa-cog mr-2 rtl:mr-0 rtl:ml-2"></i>
                                 Sign Up
                             </a>
-                           
-                        
-                            
                     </div>
 
                     <div class="pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
@@ -532,15 +525,21 @@ window.addEventListener("DOMContentLoaded", () => {
                             <button onclick="toggleRTL()" class="relative w-12 h-6 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer transition-all-300">
                                 <div class="absolute left-1 rtl:left-auto rtl:right-1 w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300"></div>
                             </button>
+                               <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="relative w-14 h-7 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer transition-all-300">
+                        <div class="absolute left-1 rtl:left-auto rtl:right-1 w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center">
+                            <i class="fas fa-sun text-yellow-500 text-xs"></i>
                         </div>
-                        
-                      
+                        <div class="flex w-full justify-between px-1">
+                            <i class="fas fa-sun text-xs text-yellow-500"></i>
+                            <i class="fas fa-moon text-xs text-blue-400"></i>
+                        </div>
+                    </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
-
 
 
 <!-- CONTACT HERO (Unique Layout) -->
@@ -556,7 +555,8 @@ window.addEventListener("DOMContentLoaded", () => {
     <div class="mx-auto w-16 h-16 flex items-center justify-center rounded-2xl
       bg-orange-600 text-white text-2xl shadow-lg hover:scale-105
       transition-all duration-300">
-      ✉️
+      <i class="bi bi-envelope-at"></i>
+
     </div>
 
     <!-- Title -->
@@ -696,7 +696,7 @@ window.addEventListener("DOMContentLoaded", () => {
     <!-- Email Card -->
     <div class="p-6 rounded-2xl bg-white/80 dark:bg-gray-900/70 backdrop-blur shadow
       hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer text-center">
-      <div class="text-4xl text-orange-600 mb-4">📩</div>
+<i class="bi bi-envelope-at"></i>
       <h3 class="font-semibold text-gray-900 dark:text-white mb-1">Email</h3>
       <p class="text-gray-600 dark:text-gray-300 text-sm">support@recipeshare.com</p>
     </div>
@@ -704,7 +704,7 @@ window.addEventListener("DOMContentLoaded", () => {
     <!-- Phone Card -->
     <div class="p-6 rounded-2xl bg-white/80 dark:bg-gray-900/70 backdrop-blur shadow
       hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer text-center">
-      <div class="text-4xl text-orange-600 mb-4">📞</div>
+<i class="bi bi-telephone-outbound"></i>
       <h3 class="font-semibold text-gray-900 dark:text-white mb-1">Phone</h3>
       <p class="text-gray-600 dark:text-gray-300 text-sm">+91 12345 67890</p>
     </div>
@@ -712,7 +712,7 @@ window.addEventListener("DOMContentLoaded", () => {
     <!-- Working Hours Card -->
     <div class="p-6 rounded-2xl bg-white/80 dark:bg-gray-900/70 backdrop-blur shadow
       hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer text-center">
-      <div class="text-4xl text-orange-600 mb-4">⏰</div>
+<i class="bi bi-hourglass-split"></i>
       <h3 class="font-semibold text-gray-900 dark:text-white mb-1">Working Hours</h3>
       <p class="text-gray-600 dark:text-gray-300 text-sm">Mon–Fri: 9:00 AM – 6:00 PM</p>
     </div>
@@ -733,8 +733,7 @@ window.addEventListener("DOMContentLoaded", () => {
     <a href="https://twitter.com" target="_blank"
       class="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/80 dark:bg-gray-900/70
       backdrop-blur shadow hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-      <div class="text-3xl text-blue-400">🐦</div>
-      <div>
+<i class="bi bi-twitter-x"></i>      <div>
         <p class="font-semibold text-gray-900 dark:text-white">Twitter</p>
         <p class="text-sm text-gray-600 dark:text-gray-300">@RecipeShare</p>
       </div>
@@ -744,8 +743,7 @@ window.addEventListener("DOMContentLoaded", () => {
     <a href="https://instagram.com" target="_blank"
       class="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/80 dark:bg-gray-900/70
       backdrop-blur shadow hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-      <div class="text-3xl text-pink-500">📸</div>
-      <div>
+<i class="bi bi-instagram"></i>      <div>
         <p class="font-semibold text-gray-900 dark:text-white">Instagram</p>
         <p class="text-sm text-gray-600 dark:text-gray-300">@RecipeShare</p>
       </div>
@@ -755,8 +753,7 @@ window.addEventListener("DOMContentLoaded", () => {
     <a href="https://youtube.com" target="_blank"
       class="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/80 dark:bg-gray-900/70
       backdrop-blur shadow hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-      <div class="text-3xl text-red-600">▶️</div>
-      <div>
+<i class="bi bi-youtube"></i>      <div>
         <p class="font-semibold text-gray-900 dark:text-white">YouTube</p>
         <p class="text-sm text-gray-600 dark:text-gray-300">RecipeShare Channel</p>
       </div>
@@ -766,8 +763,7 @@ window.addEventListener("DOMContentLoaded", () => {
     <a href="https://facebook.com" target="_blank"
       class="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/80 dark:bg-gray-900/70
       backdrop-blur shadow hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-      <div class="text-3xl text-blue-600">📘</div>
-      <div>
+<i class="bi bi-facebook"></i>      <div>
         <p class="font-semibold text-gray-900 dark:text-white">Facebook</p>
         <p class="text-sm text-gray-600 dark:text-gray-300">RecipeShare Community</p>
       </div>
@@ -799,9 +795,9 @@ Groww<span class="text-orange-500">Recipe</span>
 
       <!-- Social -->
    <div class="mt-5 flex gap-3">
-        <a class="w-9 h-9 grid place-items-center rounded-lg bg-black/10 hover:bg-white/20">🐦</a>
-        <a class="w-9 h-9 grid place-items-center rounded-lg bg-black/10 hover:bg-white/20">🌐</a>
-        <a class="w-9 h-9 grid place-items-center rounded-lg bg-black/10 hover:bg-white/20">▶️</a>
+               <a class="w-9 h-9 grid place-items-center rounded-lg bg-black/10 hover:bg-white/20"><i class="bi bi-twitter-x"></i></a>
+        <a class="w-9 h-9 grid place-items-center rounded-lg bg-black/10 hover:bg-white/20"><i class="bi bi-linkedin"></i></a>
+        <a class="w-9 h-9 grid place-items-center rounded-lg bg-black/10 hover:bg-white/20"><i class="bi bi-youtube"></i></a>
       </div>
     </div>
 
@@ -809,10 +805,10 @@ Groww<span class="text-orange-500">Recipe</span>
     <div>
       <h3 class="text-lg font-semibold text-black dark:text-white mb-3">Popular Categories</h3>
       <ul class="space-y-2 text-sm dark:text-white">
-        <li>🍕 Quick & Easy Meals</li>
-        <li>🥗 Vegan & Healthy</li>
-        <li>🍰 Desserts & Baking</li>
-        <li>🥤 Drinks & Smoothies</li>
+        <li> Quick & Easy Meals</li>
+        <li> Vegan & Healthy</li>
+        <li>Desserts & Baking</li>
+        <li>Drinks & Smoothies</li>
       </ul>
     </div>
 
@@ -820,10 +816,10 @@ Groww<span class="text-orange-500">Recipe</span>
     <div>
       <h3 class="text-lg font-semibold text-black dark:text-white mb-3">Community</h3>
       <ul class="space-y-2 text-sm dark:text-white">
-        <li>👩‍🍳 Become a Creator</li>
-        <li>⭐ Top Home Chefs</li>
-        <li>📦 Submit Your Recipe</li>
-        <li>❤️ Saved Recipes</li>
+        <li> Become a Creator</li>
+        <li>Top Home Chefs</li>
+        <li>Submit Your Recipe</li>
+        <li>Saved Recipes</li>
       
       </ul>
     </div>
@@ -832,10 +828,10 @@ Groww<span class="text-orange-500">Recipe</span>
     <div>
       <h3 class="text-lg font-semibold text-black dark:text-white mb-3">Quick Links</h3>
       <ul class="space-y-2 text-sm dark:text-white">
-        <li><a href="index.html">🏠 Home</a></li>
-        <li><a href="about.html">ℹ️ About</a></li>
-        <li><a href="blog.html">📰 Blog</a></li>
-        <li><a href="contact.html">📞 Contact</a></li>
+        <li><a href="index.html"> Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="blog.html"> Blog</a></li>
+        <li><a href="contact.html"> Contact</a></li>
    
       </ul>
     </div>
