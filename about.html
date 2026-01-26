@@ -379,57 +379,57 @@ window.addEventListener("DOMContentLoaded", () => {
 
                 <!-- Toggles on the right -->
                 <div class="flex items-center space-x-4 rtl:space-x-reverse">
-                    <!-- RTL Toggle - Hidden on mobile and tablet -->
-                    <button id="rtl-toggle" onclick="toggleRTL()" class="hidden lg:flex relative w-14 h-7 items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer transition-all-300">
-                        <div class="absolute left-1 rtl:left-auto rtl:right-1 w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center">
-                            <span class="text-xs font-bold text-gray-800">LTR</span>
-                        </div>
-                        <div class="flex w-full justify-between px-1">
-                            <i class="fas fa-align-left text-xs text-gray-600 dark:text-gray-400"></i>
-                            <i class="fas fa-align-right text-xs text-gray-600 dark:text-gray-400"></i>
-                        </div>
-                    </button>
+    <!-- RTL Toggle - Hidden at 1024px and below -->
+    <button id="rtl-toggle" onclick="toggleRTL()" class="hidden xl:flex relative w-14 h-7 items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer transition-all-300">
+        <div class="absolute left-1 rtl:left-auto rtl:right-1 w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center">
+            <span class="text-xs font-bold text-gray-800">LTR</span>
+        </div>
+        <div class="flex w-full justify-between px-1">
+            <i class="fas fa-align-left text-xs text-gray-600 dark:text-gray-400"></i>
+            <i class="fas fa-align-right text-xs text-gray-600 dark:text-gray-400"></i>
+        </div>
+    </button>
 
                     <!-- Light/Dark Mode Toggle - Hidden on mobile and tablet -->
-                    <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="hidden lg:flex relative w-14 h-7 items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer transition-all-300">
-                        <div class="absolute left-1 rtl:left-auto rtl:right-1 w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center">
-                            <i class="fas fa-sun text-yellow-500 text-xs"></i>
-                        </div>
-                        <div class="flex w-full justify-between px-1">
-                            <i class="fas fa-sun text-xs text-yellow-500"></i>
-                            <i class="fas fa-moon text-xs text-blue-400"></i>
-                        </div>
-                    </button>
+                <button id="dark-mode-toggle" onclick="toggleDarkMode()" class="hidden xl:flex relative w-14 h-7 items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 cursor-pointer transition-all-300">
+        <div class="absolute left-1 rtl:left-auto rtl:right-1 w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center">
+            <i class="fas fa-sun text-yellow-500 text-xs"></i>
+        </div>
+        <div class="flex w-full justify-between px-1">
+            <i class="fas fa-sun text-xs text-yellow-500"></i>
+            <i class="fas fa-moon text-xs text-blue-400"></i>
+        </div>
+    </button>
 
                     <!-- User avatar - Hidden on mobile and tablet -->
-                    <div class="dropdown relative hidden lg:block">
-                        <button class="dropdown-btn flex items-center space-x-2 rtl:space-x-reverse focus:outline-none">
-                            <div class="w-9 h-9 rounded-full bg-gradient-to-r from-orange-400 to-red-500 flex items-center justify-center text-white font-bold">
-                                <i class="fas fa-user"></i>
-                            </div>
-                        </button>
-                        <div class="dropdown-content hidden absolute mt-2 right-0 rtl:right-auto rtl:left-0 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50">
-                            <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-                                <p class="text-sm font-medium text-gray-900 dark:text-white">Chef Alex</p>
-                                <p class="text-xs text-gray-500 dark:text-gray-400">alex@recipeshare.com</p>
-                            </div>
-                            <a href="login.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
-                                <i class="fas fa-user mr-2 rtl:mr-0 rtl:ml-2"></i>
-                                Log In
-                            </a>
-                            <a href="signup.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
-                                <i class="fas fa-cog mr-2 rtl:mr-0 rtl:ml-2"></i>
-                                Sign Up
-                            </a>
-                        </div>
-                    </div>
+                       <div class="dropdown relative hidden xl:block">
+        <button class="dropdown-btn flex items-center space-x-2 rtl:space-x-reverse focus:outline-none">
+            <div class="w-9 h-9 rounded-full bg-gradient-to-r from-orange-400 to-red-500 flex items-center justify-center text-white font-bold">
+                <i class="fas fa-user"></i>
+            </div>
+        </button>
+        <div class="dropdown-content hidden absolute mt-2 right-0 rtl:right-auto rtl:left-0 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50">
+            <div class="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+                <p class="text-sm font-medium text-gray-900 dark:text-white">Chef Alex</p>
+                <p class="text-xs text-gray-500 dark:text-gray-400">alex@recipeshare.com</p>
+            </div>
+            <a href="login.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+                <i class="fas fa-user mr-2 rtl:mr-0 rtl:ml-2"></i>
+                Log In
+            </a>
+            <a href="signup.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-gray-700 hover:text-orange-500 dark:hover:text-orange-400 transition-colors">
+                <i class="fas fa-cog mr-2 rtl:mr-0 rtl:ml-2"></i>
+                Sign Up
+            </a>
+        </div>
+    </div>
 
                     <!-- Mobile menu button - Show at 1024px and below -->
-                    <button id="mobile-menu-button" class="xl:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
-            </div>
+                  <button id="mobile-menu-button" class="xl:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+        <i class="fas fa-bars text-xl"></i>
+    </button>
+</div>
+</div>
 
             <!-- Mobile menu - Show at 1024px and below -->
             <div id="mobile-menu" class="xl:hidden hidden py-4 border-t border-gray-200 dark:border-gray-700">
